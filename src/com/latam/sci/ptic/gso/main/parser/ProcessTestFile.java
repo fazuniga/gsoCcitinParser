@@ -36,9 +36,7 @@ public class ProcessTestFile {
     
     public CcitinParserResponse cpr = null;
     
-    public ProcessTestFile() {
-    
-    }
+    public ProcessTestFile() { }
     
     public CcitinParserResponse processFile(File file) throws Exception {
         cpr = new CcitinParserResponse();

@@ -6,7 +6,6 @@
 package com.latam.sci.ptic.gso.auxiliar;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +18,7 @@ public final class CcitinGSORegEx {
     // CCITIN Request
     public static String CcitinRQ_start = "^.*<[A-Za-z0-9:]*ccitinRequest.*$";
     public static String CcitinRQ_end = "^.*</[A-Za-z0-9:]*ccitinRequest.*$";
-    public static String CcitinRQ_dir_start = "^\\s*<Direction id=\"(?<DirectionID>\\d+)\" origin=\"(?<Origin>[A-Z]{3})\" destination=\"(?<Destination>[A-Z]{3})\" cityPOS=\"(?<cityPOS>[A-Z]{3})\" countryPOS=\"(?<countryPOS>[A-Z]{2})\" directFlightsOnly=\"(?<directFlights>no|yes)\" allowOAL=\"(?<allowOAL>no|yes)\">$";
+    public static String CcitinRQ_dir_start = "^\\s*<Direction id=\"(?<DirectionID>\\d+)\" origin=\"(?<Origin>[A-Z]{3})\" destination=\"(?<Destination>[A-Z]{3})\" cityPOS=\"(?<cityPOS>[A-Z]{3})\" countryPOS=\"(?<countryPOS>[A-Z]{2})\" directFlightsOnly=\"(?<directFlights>[no|yes]+)\" allowOAL=\"(?<allowOAL>[no|yes]+)\">$";
     public static String CcitinRQ_dir_end = "^\\s*</Direction>.*$";
     public static String CcitinRQ_dir_data = "^\\s*<DepartureDate startDate=\"(?<startDate>\\d{8})\" endDate=\"(?<endDate>\\d{8})\" frequency=\"(?<frequency>\\d{7})\" startTime=\"(?<startTime>\\d{4})\" endTime=\"(?<endTime>\\d{4})\" orientation=\"(?<orientation>[A-Z]{1})\".*$";
     
