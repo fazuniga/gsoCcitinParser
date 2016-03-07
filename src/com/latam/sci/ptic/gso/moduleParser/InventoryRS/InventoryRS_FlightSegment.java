@@ -129,6 +129,4 @@ public class InventoryRS_FlightSegment {
     public void setFareClasses(String FareClasses) {
         this.FareClasses = FareClasses;
     }
-    
-    
 }

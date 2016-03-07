@@ -119,7 +119,7 @@ public final class CcitinGSORegEx {
     public static String AirInventoryRTDPDisplayRS_start = "^.*<[A-Za-z0-9:]*AirInventoryRTDPDisplayRS.*$";
     public static String AirInventoryRTDPDisplayRS_end = "^.*</[A-Za-z0-9:]*AirInventoryRTDPDisplayRS.*$";
     public static String AirInventoryRTDPDisplayRS_UserInfo = AirInventoryRTDPDisplayRQ_UserInfo;
-    public static String AirInventoryRTDPDisplayRS_Segment = AirInventoryRTDPDisplayRQ_Segment;
+    public static String AirInventoryRTDPDisplayRS_Segment = "^\\s*<[A-Za-z0-9:]*Segment Action=\"(?<Action>[true|false]+)\" AirlineCode=\"(?<AirlineCode>[A-Z0-9]{2})\" (ArrivalDateAdj=\"(?<ArrivalDateAdj>\\d+)\")?.*ArrivalTime=\"(?<ArrivalTime>\\d+)\" DepartureDate=\"(?<DepartureDate>[0-9-]{10})\" DepartureTime=\"(?<DepartureTime>\\d+)\" Destination=\"(?<Destination>[A-Z]{3})\" FareclassAvlSeq=\"(?<FareClasses>[A-Z]+)\" FlightNumber=\"(?<FlightNumber>[0-9]+)\" NoOfLegs=\"(?<NoOfLegs>\\d+)\" Origin=\"(?<Origin>[A-Z]{3})\" RTDPActive=\"(?<RTDPActive>[true|false]+)\".*$";
     public static String AirInventoryRTDPDisplayRS_OnDInfo = AirInventoryRTDPDisplayRQ_OnDInfo;
     public static String AirInventoryRTDPDisplayRS_RPIInfo = AirInventoryRTDPDisplayRQ_RPIInfo;
     

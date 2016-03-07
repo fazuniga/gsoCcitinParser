@@ -208,8 +208,7 @@ public class InventoryRSParser {
             {
                 InventoryRS_FlightLeg currentFlightLeg = new InventoryRS_FlightLeg();
 
-                /*  private String OperatingCrrCode;
-                    private int OperatingFltNum;
+                /*  private String OperatingCrrCode, OperatingFltNum;
                     private Boolean BidPriceFlag, CodeshareFlag; */
 
                 for (String line : leg)

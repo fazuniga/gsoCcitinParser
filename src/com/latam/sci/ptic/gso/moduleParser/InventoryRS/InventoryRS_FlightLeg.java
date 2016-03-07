@@ -19,8 +19,7 @@ public class InventoryRS_FlightLeg {
     private String LegOrgn, LegDstn, LegDate;
     private String LegDepTime, LegDepDateAdj;
     private String LegArrTime, LegArrDateAdj;
-    private String OperatingCrrCode;
-    private int OperatingFltNum;
+    private String OperatingCrrCode, OperatingFltNum;
     private Boolean BidPriceFlag, CodeshareFlag;
     
     private List<SeatsClass> SeatsSold;
@@ -94,11 +93,11 @@ public class InventoryRS_FlightLeg {
         this.OperatingCrrCode = OperatingCrrCode;
     }
 
-    public int getOperatingFltNum() {
+    public String getOperatingFltNum() {
         return OperatingFltNum;
     }
 
-    public void setOperatingFltNum(int OperatingFltNum) {
+    public void setOperatingFltNum(String OperatingFltNum) {
         this.OperatingFltNum = OperatingFltNum;
     }
 
