@@ -113,12 +113,17 @@ public final class CcitinGSORegEx {
     public static String AirInventoryRTDPDisplayRQ_start = "^.*<[A-Za-z0-9:]*AirInventoryRTDPDisplayRQ.*$";
     public static String AirInventoryRTDPDisplayRQ_end = "^.*</[A-Za-z0-9:]*AirInventoryRTDPDisplayRQ.*$";
     public static String AirInventoryRTDPDisplayRQ_UserInfo = "^\\s*<[A-Za-z0-9:]*UserInfo AirlineGDS=\"(?<AirlineGDS>[A-Z0-9]+)\" ID=\"[A-Z0-9]+\" POSCity=\"(?<POSCity>[A-Z]{3})\" POSCountry=\"(?<POSCountry>[A-Z]{2})\".*$";
-    public static String AirInventoryRTDPDisplayRQ_Segment = "^\\s*<Segment Action=\"(?<Action>[true|false]+)\" AirlineCode=\"(?<AirlineCode>[A-Z0-9]{2})\" DepartureDate=\"(?<DepartureDate>[0-9-]{10})\" Destination=\"(?<Destination>[A-Z]{3})\" FlightNumber=\"(?<FlightNumber>[0-9]+)\" Origin=\"(?<Origin>[A-Z]{3})\".*$";
-    public static String AirInventoryRTDPDisplayRQ_OnDInfo = "^\\s*<OnDInfo Destination=\"(?<Destination>[A-Z]{3})\" Origin=\"(?<Origin>[A-Z]{3})\".*$";
-    public static String AirInventoryRTDPDisplayRQ_RPIInfo = "^\\s*<RPIInfo NoOfSeats=\"(?<NumberOfSeats>[0-9]+)\".*$";
+    public static String AirInventoryRTDPDisplayRQ_Segment = "^\\s*<[A-Za-z0-9:]*Segment Action=\"(?<Action>[true|false]+)\" AirlineCode=\"(?<AirlineCode>[A-Z0-9]{2})\" DepartureDate=\"(?<DepartureDate>[0-9-]{10})\" Destination=\"(?<Destination>[A-Z]{3})\" FlightNumber=\"(?<FlightNumber>[0-9]+)\" Origin=\"(?<Origin>[A-Z]{3})\".*$";
+    public static String AirInventoryRTDPDisplayRQ_OnDInfo = "^\\s*<[A-Za-z0-9:]*OnDInfo Destination=\"(?<Destination>[A-Z]{3})\" Origin=\"(?<Origin>[A-Z]{3})\".*$";
+    public static String AirInventoryRTDPDisplayRQ_RPIInfo = "^\\s*<[A-Za-z0-9:]*RPIInfo NoOfSeats=\"(?<NumberOfSeats>[0-9]+)\".*$";
     
     public static String AirInventoryRTDPDisplayRS_start = "^.*<[A-Za-z0-9:]*AirInventoryRTDPDisplayRS.*$";
     public static String AirInventoryRTDPDisplayRS_end = "^.*</[A-Za-z0-9:]*AirInventoryRTDPDisplayRS.*$";
+    public static String AirInventoryRTDPDisplayRS_UserInfo = AirInventoryRTDPDisplayRQ_UserInfo;
+    public static String AirInventoryRTDPDisplayRS_Segment = AirInventoryRTDPDisplayRQ_Segment;
+    public static String AirInventoryRTDPDisplayRS_OnDInfo = AirInventoryRTDPDisplayRQ_OnDInfo;
+    public static String AirInventoryRTDPDisplayRS_RPIInfo = AirInventoryRTDPDisplayRQ_RPIInfo;
+    
     
     public static Matcher RegExTest(String regexStr, String line)
     {
