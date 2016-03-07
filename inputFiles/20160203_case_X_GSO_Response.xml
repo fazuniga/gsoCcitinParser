@@ -1,0 +1,139 @@
+<Response>
+    <Direction id="1">
+        <Option EFT="2415" id="1">
+			<!-- 1. sequenceNumber representa el número correlativo de vuelo que utiliza el grupo dentro de la opción? -->
+            <Flight EFT="0105" aircraftType="320" arrivalDate="20160303" arrivalTime="0950" carrier="LA" departureDate="20160303" departureTime="0845" destination="SCL" flightNumber="200" origin="CCP" sequenceNumber="1">
+				<!-- **** FZ **** -->
+				<!-- Preguntas: 
+					1. Tag "Leg" y "Leg" > "Compartment": Los campos "odFactor", "allowBooking", "allowGroup", "allowSale" y "allowWaitlist": ¿De dónde salen?
+					2. Tag "Seg" y "Seg" > "Compartment": Los campos "odFactor", "allowBooking", "allowGroup", "allowSale" y "allowWaitlist", "limit": ¿De dónde salen?
+					
+					2016.02.22
+					3. ¿"sequenceNumber" es el número de leg correlativo dentro de la opción, o es el número correlativo del tramo dentro de los tramos del vuelo en particular?
+					4. ¿"dateOffset" es la diferencia en días cuando el Leg del tag actual sale, con respecto al inicio del mismo vuelo?
+						(Pensemos en el caso de un vuelo con 2 tramos, donde el segundo sale al día siguiente. Ahí sería dateOffset="1")
+					5. ¿Qué representa "odFactor"?
+					6. ¿La "adjustedCapacity" de dónde se obtiene? Yo entiendo que se obtiene directamente de PROS O&D, y eso NO está en el HOST.
+					7. ¿La "capacity" es la capacidad física?
+					8. ¿Cuál es el conjunto de Leg/Segment que hay que indicar en la respuesta? En GRMS, me parece, era sólo los Leg que atravesaba el grupo y TODOS los
+						Segments. ¿Cómo es ahora con GSO?
+				-->
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="SCL" sequenceNumber="1">
+                    <Compartment adjustedCapacity="174" capacity="174" code="Y" groupBooked="0" odFactor="100" totalAU="188" totalBooked="69">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="3"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="3"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="15"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="30"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="12"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+				<!-- **** FZ **** -->
+				<!-- Acá estoy viendo que el campo "odAvailability" se llenó con la información de LegAuth del InventoryControlFlightDisplayRS.
+					 Me parece que debería ser con la disponibilidad calculada en AirInventoryRTDPDisplayRS -->
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="SCL" origin="CCP" sequenceNumber="1">
+                    <Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="188" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="183" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="183" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="178" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="168" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="999" odAvailability="153" totalBooked="3"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="143" totalBooked="3"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="128" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="123" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="108" totalBooked="15"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="83" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="40" totalBooked="30"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="40" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="40" totalBooked="12"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+                </Segment>
+            </Flight>
+			<Flight EFT="1245" aircraftType="787" arrivalDate="20160304" arrivalTime="1300" carrier="LA" departureDate="20160303" departureTime="2015" destination="MAD" flightNumber="704" origin="SCL" sequenceNumber="2">
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="MAD" sequenceNumber="1">
+                    <Compartment adjustedCapacity="30" capacity="30" code="J" groupBooked="0" odFactor="100" totalAU="30" totalBooked="17">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="J" groupBooked="0" totalBooked="3"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="C" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="D" groupBooked="0" totalBooked="4"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="I" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Z" groupBooked="0" totalBooked="10"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="U" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="W" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="P" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="R" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+					<Compartment adjustedCapacity="213" capacity="213" code="Y" groupBooked="0" odFactor="100" totalAU="219" totalBooked="169">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="6"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="7"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="5"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="11"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="25"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="25"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="13"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="9"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="65"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="SCL" origin="MAD" sequenceNumber="1">
+                    <Compartment code="J" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="J" groupBooked="0" limit="999" odAvailability="0" totalBooked="3"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="C" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="D" groupBooked="0" limit="999" odAvailability="0" totalBooked="3"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="I" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Z" groupBooked="0" limit="999" odAvailability="0" totalBooked="9"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="U" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="W" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="P" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="R" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+					<!-- **** FZ **** -->
+					<!-- ¿Cómo se calculó el campo "odAvailability"? -->
+					
+					<!-- 2016.02.22 --> 
+					<!-- 1. El campo "limit" a nivel de segmento, ¿viene por default en "999" o cómo se calcula? 
+						En el InventoryControlFlightDisplayRS hay un campo que es "<ns2:MaxSeats/>", que me parece vendría a ser lo que se conoce como "límites por segmento",
+						que encajaría con lo que estamos hablando acá, PERO habría que confirmar con Sabre, dependiendo de qué es lo que GSO requiera en ese valor.
+					-->
+					<Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="0" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="0" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="0" totalBooked="4"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="0" totalBooked="9"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="0" totalBooked="19"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="0" totalBooked="17"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="0" totalBooked="9"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="0" totalBooked="7"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="0" totalBooked="57"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+                </Segment>
+            </Flight>
+        </Option>
+    </Direction>
+</Response>
