@@ -11,7 +11,7 @@ package com.latam.sci.ptic.gso.auxiliar;
  */
 public class CabinCapacity {
     
-    private int CabinID, PhysicalCapacity;
+    private int CabinID, Capacity;
     
     public CabinCapacity() {}
 
@@ -23,12 +23,12 @@ public class CabinCapacity {
         this.CabinID = CabinID;
     }
 
-    public int getPhysicalCapacity() {
-        return PhysicalCapacity;
+    public int getCapacity() {
+        return Capacity;
     }
 
-    public void setPhysicalCapacity(int PhysicalCapacity) {
-        this.PhysicalCapacity = PhysicalCapacity;
+    public void setCapacity(int Capacity) {
+        this.Capacity = Capacity;
     }
     
     

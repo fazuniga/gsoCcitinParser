@@ -13,9 +13,11 @@ import java.util.List;
  */
 public class RTDPAvailabilityRS {
     private String AirlineGDS, POSCity, POSCountry;
+    private int NumberOfSeats;
+    
     private List<RTDPAvailabilityRS_Segment> Segments;
     private String Origin, Destination;
-    private int NumberOfSeats;
+    
     
     public RTDPAvailabilityRS() {}
 

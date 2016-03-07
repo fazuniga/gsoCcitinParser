@@ -345,7 +345,7 @@ public class InventoryRSParser {
 
                 CabinCapacity cc = new CabinCapacity();
                 cc.setCabinID(CabinIndex);
-                cc.setPhysicalCapacity(PhysicalCapacity);
+                cc.setCapacity(PhysicalCapacity);
 
                 CabinCapacitiesOut.add(cc);
             }

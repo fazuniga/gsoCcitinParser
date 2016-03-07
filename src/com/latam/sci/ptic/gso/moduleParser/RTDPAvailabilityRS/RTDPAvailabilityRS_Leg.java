@@ -5,67 +5,18 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS;
 
-import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
-import java.util.List;
-
 /**
  *
  * @author 641515
  */
-public class RTDPAvailabilityRS_Segment {
-    private String Action;
-    private String AirlineCode, FlightNumber;
+public class RTDPAvailabilityRS_Leg {
+    
+    private String AirlineCode, FlightNumber, RTDPActive;
     private String ArrivalDateAdj, ArrivalTime, DepartureDate, DepartureTime;
     private String Origin, Destination;
-    private String FareClasses;
-    private int NoOfLegs;
-    private String RTDPActive;
-    
-    private List<SeatsClass> SeatsAvail;
-    private List<SeatsClass> RTDPAvail;
-    private List<SeatsClass> SeatsSold;
-    private List<RTDPAvailabilityRS_Leg> Legs;
+    private String LegCabins, FareCabins;
 
-    public RTDPAvailabilityRS_Segment() {}
-    
-    public String getAction() {
-        return Action;
-    }
-
-    public List<SeatsClass> getSeatsAvail() {
-        return SeatsAvail;
-    }
-
-    public void setSeatsAvail(List<SeatsClass> SeatsAvail) {
-        this.SeatsAvail = SeatsAvail;
-    }
-
-    public List<SeatsClass> getRTDPAvail() {
-        return RTDPAvail;
-    }
-
-    public void setRTDPAvail(List<SeatsClass> RTDPAvail) {
-        this.RTDPAvail = RTDPAvail;
-    }
-
-    public List<SeatsClass> getSeatsSold() {
-        return SeatsSold;
-    }
-
-    public void setSeatsSold(List<SeatsClass> SeatsSold) {
-        this.SeatsSold = SeatsSold;
-    }
-
-    public List<RTDPAvailabilityRS_Leg> getLegs() {
-        return Legs;
-    }
-
-    public void setLegs(List<RTDPAvailabilityRS_Leg> Legs) {
-        this.Legs = Legs;
-    }
-
-    public void setAction(String Action) {
-        this.Action = Action;
+    public RTDPAvailabilityRS_Leg() {
     }
 
     public String getAirlineCode() {
@@ -82,6 +33,14 @@ public class RTDPAvailabilityRS_Segment {
 
     public void setFlightNumber(String FlightNumber) {
         this.FlightNumber = FlightNumber;
+    }
+
+    public String getRTDPActive() {
+        return RTDPActive;
+    }
+
+    public void setRTDPActive(String RTDPActive) {
+        this.RTDPActive = RTDPActive;
     }
 
     public String getArrivalDateAdj() {
@@ -132,29 +91,22 @@ public class RTDPAvailabilityRS_Segment {
         this.Destination = Destination;
     }
 
-    public String getFareClasses() {
-        return FareClasses;
+    public String getLegCabins() {
+        return LegCabins;
     }
 
-    public void setFareClasses(String FareClasses) {
-        this.FareClasses = FareClasses;
+    public void setLegCabins(String LegCabins) {
+        this.LegCabins = LegCabins;
     }
 
-    public int getNoOfLegs() {
-        return NoOfLegs;
+    public String getFareCabins() {
+        return FareCabins;
     }
 
-    public void setNoOfLegs(int NoOfLegs) {
-        this.NoOfLegs = NoOfLegs;
+    public void setFareCabins(String FareCabins) {
+        this.FareCabins = FareCabins;
     }
 
-    public String getRTDPActive() {
-        return RTDPActive;
-    }
-
-    public void setRTDPActive(String RTDPActive) {
-        this.RTDPActive = RTDPActive;
-    }
     
     
 }
