@@ -5,7 +5,7 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.InventoryRS;
 
-import com.latam.sci.ptic.gso.auxiliar.CabinCapacity;
+import com.latam.sci.ptic.gso.auxiliar.Cabin;
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import com.latam.sci.ptic.gso.auxiliar.CabinNesting;
 import java.util.List;
@@ -24,7 +24,7 @@ public class InventoryRS_FlightLeg {
     
     private List<SeatsClass> SeatsSold;
     private List<SeatsClass> LegAuthorization;
-    private List<CabinCapacity> CabinCapacities;
+    private List<Cabin> CabinCapacities;
     private List<CabinNesting> CabinNesting;
     
     public InventoryRS_FlightLeg() {}
@@ -133,11 +133,11 @@ public class InventoryRS_FlightLeg {
         this.LegAuthorization = LegAuthorization;
     }
 
-    public List<CabinCapacity> getCabinCapacities() {
+    public List<Cabin> getCabinCapacities() {
         return CabinCapacities;
     }
 
-    public void setCabinCapacities(List<CabinCapacity> CabinCapacities) {
+    public void setCabinCapacities(List<Cabin> CabinCapacities) {
         this.CabinCapacities = CabinCapacities;
     }
 

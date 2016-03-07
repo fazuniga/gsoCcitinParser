@@ -9,11 +9,11 @@ package com.latam.sci.ptic.gso.auxiliar;
  *
  * @author 641515
  */
-public class CabinCapacity {
+public class Cabin {
     
-    private int CabinID, Capacity;
+    private int CabinID, Quantity;
     
-    public CabinCapacity() {}
+    public Cabin() {}
 
     public int getCabinID() {
         return CabinID;
@@ -23,12 +23,12 @@ public class CabinCapacity {
         this.CabinID = CabinID;
     }
 
-    public int getCapacity() {
-        return Capacity;
+    public int getQuantity() {
+        return Quantity;
     }
 
-    public void setCapacity(int Capacity) {
-        this.Capacity = Capacity;
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
     }
     
     

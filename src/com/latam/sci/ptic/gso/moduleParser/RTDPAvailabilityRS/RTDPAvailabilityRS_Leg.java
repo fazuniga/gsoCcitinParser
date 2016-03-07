@@ -5,6 +5,9 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS;
 
+import com.latam.sci.ptic.gso.auxiliar.Cabin;
+import java.util.List;
+
 /**
  *
  * @author 641515
@@ -15,8 +18,45 @@ public class RTDPAvailabilityRS_Leg {
     private String ArrivalDateAdj, ArrivalTime, DepartureDate, DepartureTime;
     private String Origin, Destination;
     private String LegCabins, FareCabins;
+    
+    private List<Cabin> CabinCapacities;
+    private List<Cabin> CabinAuth;
+    private List<Cabin> CabinSeatsSold;
+    private List<Cabin> CabinSeatsAvail;
 
     public RTDPAvailabilityRS_Leg() {
+    }
+
+    public List<Cabin> getCabinCapacities() {
+        return CabinCapacities;
+    }
+
+    public void setCabinCapacities(List<Cabin> CabinCapacities) {
+        this.CabinCapacities = CabinCapacities;
+    }
+
+    public List<Cabin> getCabinAuth() {
+        return CabinAuth;
+    }
+
+    public void setCabinAuth(List<Cabin> CabinAuth) {
+        this.CabinAuth = CabinAuth;
+    }
+
+    public List<Cabin> getCabinSeatsSold() {
+        return CabinSeatsSold;
+    }
+
+    public void setCabinSeatsSold(List<Cabin> CabinSeatsSold) {
+        this.CabinSeatsSold = CabinSeatsSold;
+    }
+
+    public List<Cabin> getCabinSeatsAvail() {
+        return CabinSeatsAvail;
+    }
+
+    public void setCabinSeatsAvail(List<Cabin> CabinSeatsAvail) {
+        this.CabinSeatsAvail = CabinSeatsAvail;
     }
 
     public String getAirlineCode() {

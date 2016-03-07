@@ -7,7 +7,7 @@ package com.latam.sci.ptic.gso.moduleParser.InventoryRS;
 
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import com.latam.sci.ptic.gso.auxiliar.CcitinGSORegEx;
-import com.latam.sci.ptic.gso.auxiliar.CabinCapacity;
+import com.latam.sci.ptic.gso.auxiliar.Cabin;
 import com.latam.sci.ptic.gso.auxiliar.CabinNesting;
 import java.util.ArrayList;
 import java.util.List;
@@ -286,7 +286,7 @@ public class InventoryRSParser {
 
                 // CabinCapacities - It should appear just once
                 if (LegCabinCapacities != null) {
-                    List<CabinCapacity> Capacities = ProcessCabinCapacity(LegCabinCapacities.get(0));
+                    List<Cabin> Capacities = ProcessCabin(LegCabinCapacities.get(0));
                     currentFlightLeg.setCabinCapacities(Capacities);
                 }
 
@@ -330,9 +330,9 @@ public class InventoryRSParser {
         return SeatsClassOut;
     }
     
-    public List<CabinCapacity> ProcessCabinCapacity(List<String> LinesCabinCapacities) {
+    public List<Cabin> ProcessCabin(List<String> LinesCabinCapacities) {
         Matcher m;
-        List<CabinCapacity> CabinCapacitiesOut = new ArrayList<>();
+        List<Cabin> CabinCapacitiesOut = new ArrayList<>();
         
         for (String line : LinesCabinCapacities) 
         {
@@ -343,9 +343,9 @@ public class InventoryRSParser {
                 int CabinIndex = Integer.parseInt(m.group("CabinIndex"));
                 int PhysicalCapacity = Integer.parseInt(m.group("Capacity"));
 
-                CabinCapacity cc = new CabinCapacity();
+                Cabin cc = new Cabin();
                 cc.setCabinID(CabinIndex);
-                cc.setCapacity(PhysicalCapacity);
+                cc.setQuantity(PhysicalCapacity);
 
                 CabinCapacitiesOut.add(cc);
             }

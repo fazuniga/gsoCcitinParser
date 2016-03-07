@@ -5,6 +5,7 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS;
 
+import com.latam.sci.ptic.gso.auxiliar.Cabin;
 import com.latam.sci.ptic.gso.auxiliar.CcitinGSORegEx;
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import java.util.ArrayList;
@@ -50,21 +51,32 @@ public class RTDPAvailabilityRSParser {
 
                     rtdpRS.setNumberOfSeats(NumberOfSeats);
                 }
-
-                
-
-                m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
-                if (m.find())
-                {
-                    String Origin = m.group("Origin");
-                    String Destination = m.group("Destination");
-
-                    rtdpRS.setOrigin(Origin);
-                    rtdpRS.setDestination(Destination);
-                }
-
-                
             }
+            
+            List<List<String>> Segments = CcitinGSORegEx.IsolateSection(
+                    RTDPAvailabilityRSLines, 
+                    CcitinGSORegEx.AirInventoryRTDPDisplayRS_Segment_start, 
+                    CcitinGSORegEx.AirInventoryRTDPDisplayRS_Segment_end);
+            rtdpRSSegments = ProcessSegments(Segments);
+            
+            List<List<String>> OnDInfo = CcitinGSORegEx.IsolateSection(
+                    RTDPAvailabilityRSLines, 
+                    CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, 
+                    CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_end);
+            // rtdpRSOnDInfos = ProcessOnDInfo(OnDInfo);
+            
+            
+            /* TERMINAR ESTO 
+            m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
+            if (m.find())
+            {
+                String Origin = m.group("Origin");
+                String Destination = m.group("Destination");
+
+                rtdpRS.setOrigin(Origin);
+                rtdpRS.setDestination(Destination);
+            } */
+            
             // Finish the element
             rtdpRS.setSegments(rtdpRSSegments);
         }
@@ -159,6 +171,7 @@ public class RTDPAvailabilityRSParser {
                 FlightSegments.add(currentFlightSeg);
             }
         }
+        
         return FlightSegments;
     }
     
@@ -166,7 +179,7 @@ public class RTDPAvailabilityRSParser {
         
         Matcher m;
         List<RTDPAvailabilityRS_Leg> FlightLegs = new ArrayList<>();
-        /*
+        
         if (Legs != null)
         {
             for (List<String> leg : Legs)
@@ -175,97 +188,82 @@ public class RTDPAvailabilityRSParser {
 
                 for (String line : leg)
                 {
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightLeg_Origin, line);
+                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_Segment_Leg_start, line);
                     if (m.find()) {
-                        String SegOrgn = m.group("Origin");
-                        currentFlightLeg.setLegOrgn(SegOrgn);
+                        String AirlineCode = m.group("AirlineCode");
+                        String FlightNumber = m.group("FlightNumber");
+                        String RTDPActive = m.group("RTDPActive");
+                        String ArrivalDateAdj = m.group("ArrivalDateAdj");
+                        String ArrivalTime = m.group("ArrivalTime");
+                        String DepartureDate = m.group("DepartureDate");
+                        String DepartureTime = m.group("DepartureTime");
+                        String Origin = m.group("Origin");
+                        String Destination = m.group("Destination");
+                        String LegCabins = m.group("LegCabins");
+                        String FareCabins = m.group("FareCabins");
+                        
+                        currentFlightLeg.setAirlineCode(AirlineCode);
+                        currentFlightLeg.setFlightNumber(FlightNumber);
+                        currentFlightLeg.setRTDPActive(RTDPActive);
+                        currentFlightLeg.setArrivalDateAdj(ArrivalDateAdj);
+                        currentFlightLeg.setArrivalTime(ArrivalTime);
+                        currentFlightLeg.setDepartureDate(DepartureDate);
+                        currentFlightLeg.setDepartureTime(DepartureTime);
+                        currentFlightLeg.setOrigin(Origin);
+                        currentFlightLeg.setDestination(Destination);
+                        currentFlightLeg.setLegCabins(LegCabins);
+                        currentFlightLeg.setFareCabins(FareCabins);
                     }
-
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightLeg_Destination, line);
-                    if (m.find()) {
-                        String SegDstn = m.group("Destination");
-                        currentFlightLeg.setLegDstn(SegDstn);
-                    }
-
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightLeg_Date, line);
-                    if (m.find()) {
-                        String SegDate = m.group("FlightDate");
-                        currentFlightLeg.setLegDate(SegDate);
-                    }
-
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightLeg_DepTime, line);
-                    if (m.find()) {
-                        String LegDepTime = m.group("DepTime");
-                        currentFlightLeg.setLegDepTime(LegDepTime);
-                    }
-
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightLeg_ArrTime, line);
-                    if (m.find()) {
-                        String LegArrTime = m.group("ArrTime");
-                        currentFlightLeg.setLegArrTime(LegArrTime);
-                    }
-
-                    // These fields may not be present
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightSegment_DepDateAdj, line);
-                    if (m.find()) {
-                        String LegDptDateAdj = m.group("DptDateAdj");
-                        currentFlightLeg.setLegDepDateAdj(LegDptDateAdj);
-                    }
-
-                    m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.InventoryRS_FlightSegment_ArrDateAdj, line);
-                    if (m.find()) {
-                        String LegArrDateAdj = m.group("ArrDateAdj");
-                        currentFlightLeg.setLegArrDateAdj(LegArrDateAdj);
-                    }
-                }
-
-                List<List<String>> LegSeatsSold = CcitinGSORegEx.IsolateSection(
-                        leg, 
-                        CcitinGSORegEx.InventoryRS_FlightLeg_SeatsSold_start,
-                        CcitinGSORegEx.InventoryRS_FlightLeg_SeatsSold_end);
-
-                // Seats Sold - It should appear just once
-                if (LegSeatsSold != null) {
-                    List<SeatsClass> SeatsSold = ProcessSeatsClass(LegSeatsSold.get(0));
-                    currentFlightLeg.setSeatsSold(SeatsSold);
-                }
-
-                List<List<String>> LegAuthorization = CcitinGSORegEx.IsolateSection(
-                        leg, 
-                        CcitinGSORegEx.InventoryRS_FlightLeg_LegAuth_start,
-                        CcitinGSORegEx.InventoryRS_FlightLeg_LegAuth_end);
-
-                // Leg Authorization - It should appear just once
-                if (LegAuthorization != null) {
-                    List<SeatsClass> LegAuth = ProcessSeatsClass(LegAuthorization.get(0));
-                    currentFlightLeg.setLegAuthorization(LegAuth);
                 }
 
                 List<List<String>> LegCabinCapacities = CcitinGSORegEx.IsolateSection(
                         leg, 
-                        CcitinGSORegEx.InventoryRS_FlightLeg_Capacities_start,
-                        CcitinGSORegEx.InventoryRS_FlightLeg_Capacities_end);
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinCapacities_start,
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinCapacities_end);
 
-                // CabinCapacities - It should appear just once
+                // LegCabinCapacities - It should appear just once
                 if (LegCabinCapacities != null) {
-                    List<CabinCapacity> Capacities = ProcessCabinCapacity(LegCabinCapacities.get(0));
-                    currentFlightLeg.setCabinCapacities(Capacities);
+                    List<Cabin> CabinCapacities = ProcessCabin(LegCabinCapacities.get(0));
+                    currentFlightLeg.setCabinCapacities(CabinCapacities);
                 }
 
-                List<List<String>> LegCabinNesting = CcitinGSORegEx.IsolateSection(
+                List<List<String>> LegCabinAuth = CcitinGSORegEx.IsolateSection(
                         leg, 
-                        CcitinGSORegEx.InventoryRS_FlightLeg_CabinNesting_start,
-                        CcitinGSORegEx.InventoryRS_FlightLeg_CabinNesting_end);
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinAuth_start,
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinAuth_end);
 
-                // CabinCapacities - It should appear just once
-                if (LegCabinNesting != null) {
-                    List<CabinNesting> CabinNestings = ProcessCabinNesting(LegCabinNesting.get(0));
-                    currentFlightLeg.setCabinNesting(CabinNestings);
+                // LegCabinAuth - It should appear just once
+                if (LegCabinAuth != null) {
+                    List<Cabin> CabinAuth = ProcessCabin(LegCabinAuth.get(0));
+                    currentFlightLeg.setCabinAuth(CabinAuth);
+                }
+                
+                List<List<String>> LegCabinSeatsSold = CcitinGSORegEx.IsolateSection(
+                        leg, 
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinSeatsSold_start,
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinSeatsSold_end);
+
+                // LegCabinSeatsSold - It should appear just once
+                if (LegCabinSeatsSold != null) {
+                    List<Cabin> CabinSeatsSold = ProcessCabin(LegCabinSeatsSold.get(0));
+                    currentFlightLeg.setCabinSeatsSold(CabinSeatsSold);
+                }
+                
+                List<List<String>> LegCabinSeatsAvail = CcitinGSORegEx.IsolateSection(
+                        leg, 
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinSeatsSold_start,
+                        CcitinGSORegEx.AirInventoryRTDPDisplayRS_Leg_CabinSeatsSold_end);
+
+                // LegCabinSeatsAvail - It should appear just once
+                if (LegCabinSeatsAvail != null) {
+                    List<Cabin> CabinSeatsAvail = ProcessCabin(LegCabinSeatsAvail.get(0));
+                    currentFlightLeg.setCabinSeatsAvail(CabinSeatsAvail);
                 }
 
                 FlightLegs.add(currentFlightLeg);
             }
-        }*/
+        }
+        
         return FlightLegs;
     }
     
@@ -290,5 +288,28 @@ public class RTDPAvailabilityRSParser {
             }
         }
         return SeatsClassOut;
+    }
+    
+    public List<Cabin> ProcessCabin(List<String> LinesCabin) {
+        Matcher m;
+        List<Cabin> CabinOut = new ArrayList<>();
+        
+        for (String line : LinesCabin) 
+        {
+            m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_Segment_CabinData, line);
+
+            if (m.find())
+            {
+                int CabinIndex = Integer.parseInt(m.group("CabinIndex"));
+                int Amount = Integer.parseInt(m.group("Amount"));
+
+                Cabin cc = new Cabin();
+                cc.setCabinID(CabinIndex);
+                cc.setQuantity(Amount);
+
+                CabinOut.add(cc);
+            }
+        }
+        return CabinOut;
     }
 }
