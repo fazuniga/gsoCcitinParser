@@ -27,6 +27,8 @@ import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRSParser;
 import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRQ.RTDPAvailabilityRQ;
 import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRQ.RTDPAvailabilityRQParser;
+import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS;
+import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRSParser;
 
 /**
  *
@@ -177,6 +179,10 @@ public class ProcessTestFile {
                         cpr.rtdpAvailabilityRQ.add(rtdpRQ);
                         break;
                     case RTDPAvailabilityRS:
+                        RTDPAvailabilityRSParser rtdpRSparser = new RTDPAvailabilityRSParser();
+                        RTDPAvailabilityRS rtdpRS = rtdpRSparser.RTDPAvailabilityRSProcessLines(sectionLines);
+                        if (cpr.rtdpAvailabilityRS == null) { cpr.rtdpAvailabilityRS = new ArrayList<>(); }
+                        cpr.rtdpAvailabilityRS.add(rtdpRS);
                         break;
                     default:
                         break;
