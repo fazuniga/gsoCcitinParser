@@ -18,10 +18,7 @@ import java.util.regex.Matcher;
  */
 public class CcitinRSParser {
     
-    public CcitinRSParser()
-    {
-        
-    }
+    public CcitinRSParser() { }
 }
     /*
     @SuppressWarnings("null")

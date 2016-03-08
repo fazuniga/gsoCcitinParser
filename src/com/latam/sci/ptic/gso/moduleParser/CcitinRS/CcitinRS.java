@@ -12,15 +12,6 @@ import java.util.List;
  * @author 641515
  */
 public class CcitinRS {
-    private List<CcitinRSElement> ccitinRS = null;
-
-    public List<CcitinRSElement> getCcitinRS() {
-        return ccitinRS;
-    }
-
-    public void setCcitinRS(List<CcitinRSElement> ccitinRS) {
-        this.ccitinRS = ccitinRS;
-    }
     
     public CcitinRS() { }
 }
