@@ -12,7 +12,7 @@ package com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS;
 public class RTDPAvailabilityRS_Fares {
     
     private String ClsCode;
-    private Integer FareValue, AdjustedFareValue, BidPrice;
+    private int FareValue, AdjustedFareValue, BidPrice;
 
     public RTDPAvailabilityRS_Fares() {
     }
@@ -25,27 +25,27 @@ public class RTDPAvailabilityRS_Fares {
         this.ClsCode = ClsCode;
     }
 
-    public Integer getFareValue() {
+    public int getFareValue() {
         return FareValue;
     }
 
-    public void setFareValue(Integer FareValue) {
+    public void setFareValue(int FareValue) {
         this.FareValue = FareValue;
     }
 
-    public Integer getAdjustedFareValue() {
+    public int getAdjustedFareValue() {
         return AdjustedFareValue;
     }
 
-    public void setAdjustedFareValue(Integer AdjustedFareValue) {
+    public void setAdjustedFareValue(int AdjustedFareValue) {
         this.AdjustedFareValue = AdjustedFareValue;
     }
 
-    public Integer getBidPrice() {
+    public int getBidPrice() {
         return BidPrice;
     }
 
-    public void setBidPrice(Integer BidPrice) {
+    public void setBidPrice(int BidPrice) {
         this.BidPrice = BidPrice;
     }
     
