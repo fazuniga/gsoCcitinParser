@@ -6,6 +6,7 @@
 package com.latam.sci.ptic.gso.moduleParser.CcitinRQ;
 
 import com.latam.sci.ptic.gso.auxiliar.CcitinGSORegEx;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -27,12 +28,16 @@ public class CcitinRQParser {
         if (CcitinRQLines != null) 
         {
             cRQ = new CcitinRQ();
+            List<CcitinRQDirection> Directions = new ArrayList<>();
+            CcitinRQDirection cRQDir = null;
             
             for (String line : CcitinRQLines)
             {
                 m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.CcitinRQ_dir_start, line);
                 if (m.find())
                 {
+                    cRQDir = new CcitinRQDirection();
+                    
                     String DirectionID = m.group("DirectionID");
                     String dirOrigin = m.group("Origin");
                     String dirDestination = m.group("Destination");
@@ -41,13 +46,13 @@ public class CcitinRQParser {
                     String directFlights = m.group("directFlights");
                     String allowOAL = m.group("allowOAL");
 
-                    cRQ.setDirectionID(DirectionID);
-                    cRQ.setOrigin(dirOrigin);
-                    cRQ.setDestination(dirDestination);
-                    cRQ.setCityPOS(dirCityPOS);
-                    cRQ.setCountryPOS(dirCountryPOS);
-                    cRQ.setDirectFlights(directFlights);
-                    cRQ.setAllowOAL(allowOAL);
+                    cRQDir.setDirectionID(DirectionID);
+                    cRQDir.setOrigin(dirOrigin);
+                    cRQDir.setDestination(dirDestination);
+                    cRQDir.setCityPOS(dirCityPOS);
+                    cRQDir.setCountryPOS(dirCountryPOS);
+                    cRQDir.setDirectFlights(directFlights);
+                    cRQDir.setAllowOAL(allowOAL);
                 } 
 
                 m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.CcitinRQ_dir_data, line);
@@ -60,14 +65,18 @@ public class CcitinRQParser {
                     String endTime = m.group("endTime");
                     String orientation = m.group("orientation");
 
-                    cRQ.setStartDate(startDate);
-                    cRQ.setEndDate(endDate);
-                    cRQ.setFrequency(frequency);
-                    cRQ.setStartTime(startTime);
-                    cRQ.setEndTime(endTime);
-                    cRQ.setOrientation(orientation);
+                    cRQDir.setStartDate(startDate);
+                    cRQDir.setEndDate(endDate);
+                    cRQDir.setFrequency(frequency);
+                    cRQDir.setStartTime(startTime);
+                    cRQDir.setEndTime(endTime);
+                    cRQDir.setOrientation(orientation);
+                    
+                    Directions.add(cRQDir);
                 }
             }
+            
+            cRQ.setDirections(Directions);
         }
         
         return cRQ;
