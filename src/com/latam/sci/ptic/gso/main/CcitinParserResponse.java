@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.latam.sci.ptic.gso.main.parser;
+package com.latam.sci.ptic.gso.main;
 
 import java.util.List;
 import com.latam.sci.ptic.gso.moduleParser.CcitinRQ.CcitinRQ;

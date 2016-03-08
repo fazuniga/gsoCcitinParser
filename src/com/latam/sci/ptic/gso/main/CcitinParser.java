@@ -1,4 +1,4 @@
-package com.latam.sci.ptic.gso.main.parser;
+package com.latam.sci.ptic.gso.main;
 
 /*
  * @author fazuniga
