@@ -16,10 +16,17 @@ public class RTDPAvailabilityRS {
     private int NumberOfSeats;
     
     private List<RTDPAvailabilityRS_Segment> Segments;
-    private String Origin, Destination;
-    
+    private List<RTDPAvailabilityRS_OnDInfo> OnDInfos;
     
     public RTDPAvailabilityRS() {}
+
+    public List<RTDPAvailabilityRS_OnDInfo> getOnDInfos() {
+        return OnDInfos;
+    }
+
+    public void setOnDInfos(List<RTDPAvailabilityRS_OnDInfo> OnDInfos) {
+        this.OnDInfos = OnDInfos;
+    }
 
     public String getAirlineGDS() {
         return AirlineGDS;
@@ -51,22 +58,6 @@ public class RTDPAvailabilityRS {
 
     public void setSegments(List<RTDPAvailabilityRS_Segment> Segments) {
         this.Segments = Segments;
-    }
-
-    public String getOrigin() {
-        return Origin;
-    }
-
-    public void setOrigin(String Origin) {
-        this.Origin = Origin;
-    }
-
-    public String getDestination() {
-        return Destination;
-    }
-
-    public void setDestination(String Destination) {
-        this.Destination = Destination;
     }
 
     public int getNumberOfSeats() {

@@ -59,25 +59,20 @@ public class RTDPAvailabilityRSParser {
                     CcitinGSORegEx.AirInventoryRTDPDisplayRS_Segment_end);
             rtdpRSSegments = ProcessSegments(Segments);
             
-            List<List<String>> OnDInfo = CcitinGSORegEx.IsolateSection(
+            List<List<String>> OnDInfos = CcitinGSORegEx.IsolateSection(
                     RTDPAvailabilityRSLines, 
                     CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, 
                     CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_end);
-            // rtdpRSOnDInfos = ProcessOnDInfo(OnDInfo);
             
-            
-            /* TERMINAR ESTO 
-            m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
-            if (m.find())
+            List<RTDPAvailabilityRS_OnDInfo> OnDInfoaux = null;
+            for (List<String> OnDInfo : OnDInfos)
             {
-                String Origin = m.group("Origin");
-                String Destination = m.group("Destination");
-
-                rtdpRS.setOrigin(Origin);
-                rtdpRS.setDestination(Destination);
-            } */
+                if (OnDInfoaux == null) { OnDInfoaux = new ArrayList<>(); }
+                OnDInfoaux.add(ProcessOnDInfo(OnDInfo));
+            }
             
             // Finish the element
+            rtdpRS.setOnDInfos(OnDInfoaux);
             rtdpRS.setSegments(rtdpRSSegments);
         }
         
@@ -312,4 +307,61 @@ public class RTDPAvailabilityRSParser {
         }
         return CabinOut;
     }
+
+    public RTDPAvailabilityRS_OnDInfo ProcessOnDInfo(List<String> OnDInfo) {
+        Matcher m;
+        RTDPAvailabilityRS_OnDInfo OnDInfoOut = null;
+        
+        if (OnDInfo != null)
+        {
+            OnDInfoOut = new RTDPAvailabilityRS_OnDInfo();
+            List<Integer> SegIndices = null;
+            List<RTDPAvailabilityRS_Fares> Fares = null;
+            
+            for (String line : OnDInfo) 
+            {
+                m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
+                if (m.find())
+                {
+                    String Origin = m.group("Origin");
+                    String Destination = m.group("Destination");
+
+                    OnDInfoOut.setOrigin(Origin);
+                    OnDInfoOut.setDestination(Destination);
+                }
+                
+                m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_SegIndex, line);
+                if (m.find())
+                {
+                    if (SegIndices == null) { SegIndices = new ArrayList<>(); }
+                    int SegIndex = Integer.parseInt(m.group("SegIndex"));
+                    SegIndices.add(SegIndex);
+                }
+                
+                m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_Fares, line);
+                if (m.find())
+                {
+                    if (Fares == null) { Fares = new ArrayList<>(); }
+                    
+                    String ClsCode = m.group("ClsCode");
+                    int BidPrice = Integer.parseInt(m.group("BidPrice"));
+                    int AdjustedFareValue = Integer.parseInt(m.group("AdjustedFareValue"));
+                    int FareValue = Integer.parseInt(m.group("FareValue"));
+                    
+                    RTDPAvailabilityRS_Fares Fare = new RTDPAvailabilityRS_Fares();
+                    Fare.setAdjustedFareValue(AdjustedFareValue);
+                    Fare.setBidPrice(BidPrice);
+                    Fare.setClsCode(ClsCode);
+                    Fare.setFareValue(FareValue);
+
+                    Fares.add(Fare);
+                }
+            }
+            
+            OnDInfoOut.setSegIndex(SegIndices);
+            OnDInfoOut.setFares(Fares);
+        }
+        return OnDInfoOut;        
+    }
+
 }
