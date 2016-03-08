@@ -23,7 +23,7 @@ public class CcitinParserProcess {
     public CcitinParserProcess() { }
     
     public void RunParser() throws Exception {
-    // 0. Initialize Class that reads and processes the files
+        // 0. Initialize Class that reads and processes the files
         processTestFile = new ProcessTestFile();
         cprList = new ArrayList<>();
         
@@ -31,9 +31,7 @@ public class CcitinParserProcess {
         //  - getFileFormat defines the extension of the files
         //  - getInputFilesFolder determines the input folder
         files = Constants.getInputFiles(Constants.getInputFilesFolder(), Constants.getFileFormat());
-        
-        // cprList = new AbstractList<CcitinParserResponse>();
-        
+         
         for (File file : files)
         {
             CcitinParserResponse cpr = processTestFile.processFile(file);
