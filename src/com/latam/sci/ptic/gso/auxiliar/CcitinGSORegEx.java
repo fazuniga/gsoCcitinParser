@@ -147,7 +147,7 @@ public final class CcitinGSORegEx {
     public static String AirInventoryRTDPDisplayRS_OnDInfo_start = AirInventoryRTDPDisplayRQ_OnDInfo;
     public static String AirInventoryRTDPDisplayRS_OnDInfo_end = "^\\s*</[A-Za-z0-9:]*OnDInfo.*$";
     public static String AirInventoryRTDPDisplayRS_OnDInfo_SegIndex = "^\\s*<SegIndex>(?<SegIndex>\\d+)<\\/SegIndex>.*$";
-    public static String AirInventoryRTDPDisplayRS_OnDInfo_Fares = "^\\s*<Fares AdjustedFareValue=\"(?<AdjustedFareValue>\\d+)\" BidPrice=\"(?<BidPrice>\\d+)\" Class=\"(?<ClsCode>[A-Z]{1})\" FareValue=\"(?<FareValue>\\d+)\".*$";
+    public static String AirInventoryRTDPDisplayRS_OnDInfo_Fares = "^\\s*<Fares AdjustedFareValue=\"(?<AdjustedFareValue>\\d+)\"\\s*(BidPrice=\"(?<BidPrice>\\d+)\")? Class=\"(?<ClsCode>[A-Z]{1})\" FareValue=\"(?<FareValue>\\d+)\".*$";
     
     
     public static Matcher RegExTest(String regexStr, String line)
