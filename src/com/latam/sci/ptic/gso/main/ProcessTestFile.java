@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.latam.sci.ptic.gso.moduleParser.CcitinRQ.CcitinRQ;
 import com.latam.sci.ptic.gso.moduleParser.CcitinRQ.CcitinRQParser;
+import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRS;
+import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRSParser;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRQ.InventoryRQ;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRQ.InventoryRQParser;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS;
@@ -147,6 +149,9 @@ public class ProcessTestFile {
                         cpr.ccitinRQ = cRQ;
                         break;
                     case CcitinRS:
+                        CcitinRSParser cRSparser = new CcitinRSParser();
+                        CcitinRS cRS = cRSparser.CcitinRSProcessLines(sectionLines);
+                        cpr.ccitinRS = cRS;
                         break;
                     case OTA_AirAvailRQ:
                         OTA_AirAvailRQParser otaRQparser = new OTA_AirAvailRQParser();

@@ -258,15 +258,16 @@ public class CcitinRSParser {
                                                         m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.CcitinRS_Direction_OptionFlight_Leg_Cmp_end, line);
                                                         if (m.find())
                                                         {
+                                                            legcmp.setClasses(Classes);
                                                             legcmps.add(legcmp);
                                                         }
                                                     }
                                                 }
+                                                leg.setCompartments(legcmps);
                                             }
-                                            leg.setCompartments(legcmps);
                                         }
+                                        legs.add(leg);
                                     }
-                                    legs.add(leg);
                                     
                                     // Process Segs
                                     if (Segs != null)
