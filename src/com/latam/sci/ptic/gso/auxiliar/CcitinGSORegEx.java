@@ -25,7 +25,22 @@ public final class CcitinGSORegEx {
     // CCITIN Response
     public static String CcitinRS_start = "^.*<Response>.*$";
     public static String CcitinRS_end = "^.*</Response>.*$";
-    public static String CcitinRS_Dir = "^.*<Direction id=\"(\\d+)\">.*$";
+    public static String CcitinRS_Direction_start = "^.*<Direction id=\"(?<DirectionID>\\d+)\">.*$";
+    public static String CcitinRS_Direction_end = "^.*</Direction>.*$";
+    public static String CcitinRS_Direction_Option_start = "^\\s*<Option EFT=\"(?<EFT>\\d+)\" id=\"(?<OptionID>\\d+)\">.*$";
+    public static String CcitinRS_Direction_Option_end = "^\\s*</Option>.*$";
+    public static String CcitinRS_Direction_OptionFlight_start = "^\\s*<Flight EFT=\"(?<EFT>\\d+)\" aircraftType=\"(?<aircraftType>\\d+)\" arrivalDate=\"(?<arrivalDate>\\d{8})\" arrivalTime=\"(?<arrivalTime>\\d+)\" carrier=\"(?<carrier>[A-Z0-9]{2})\" departureDate=\"(?<departureDate>\\d{8})\" departureTime=\"(?<departureTime>\\d+)\" destination=\"(?<destination>[A-Z]{3})\" flightNumber=\"(?<flightNumber>\\d+)\" origin=\"(?<origin>[A-Z]{3})\" sequenceNumber=\"(?<sequenceNumber>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_end = "^\\s*</Flight>.*$";
+    public static String CcitinRS_Direction_OptionFlight_Leg_start = "^\\s*<Leg allowBooking=\"(?<allowBooking>\\d+)\" allowGroup=\"(?<allowGroup>\\d+)\" allowSale=\"(?<allowSale>\\d+)\" allowWaitList=\"(?<allowWaitList>\\d+)\" dateOffset=\"(?<dateOffset>\\d+)\" destination=\"(?<LegDstn>[A-Z]{3})\" sequenceNumber=\"(?<sequenceNumber>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_Leg_end = "^\\s*</Leg>.*$";
+    public static String CcitinRS_Direction_OptionFlight_Leg_Cmp_start = "^\\s*<Compartment adjustedCapacity=\"(?<adjustedCapacity>\\d+)\" capacity=\"(?<capacity>\\d+)\" code=\"(?<CmpCode>[A-Z]{1})\" groupBooked=\"(?<groupBooked>\\d+)\" odFactor=\"(?<odFactor>\\d+)\" totalAU=\"(?<totalAU>\\d+)\" totalBooked=\"(?<totalBooked>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_Leg_Cmp_end = "\\s*</Compartment>.*$";
+    public static String CcitinRS_Direction_OptionFlight_Leg_Cmp_Class = "^\\s*<Class allowBooking=\"(?<allowBooking>\\d+)\" allowGroup=\"(?<allowGroup>\\d+)\" allowSale=\"(?<allowSale>\\d+)\" allowWaitList=\"(?<allowWaitList>\\d+)\" code=\"(?<ClsCode>[A-Z]{1})\" groupBooked=\"(?<groupBooked>\\d+)\" totalBooked=\"(?<totalBooked>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_Seg_start = "^\\s*<Segment allowBooking=\"(?<allowBooking>\\d+)\" allowGroup=\"(?<allowGroup>\\d+)\" allowSale=\"(?<allowSale>\\d+)\" allowWaitList=\"(?<allowWaitList>\\d+)\" destination=\"(?<SegDstn>[A-Z]{3})\" origin=\"(?<SegOrgn>[A-Z]{3})\" sequenceNumber=\"(?<sequenceNumber>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_Seg_end = "^\\s*</Segment>.*$";
+    public static String CcitinRS_Direction_OptionFlight_Seg_Cmp_start = "^\\s*<Compartment code=\"(?<CmpCode>[A-Z]{1})\" groupBooked=\"(?<groupBooked>\\d+)\".*$";
+    public static String CcitinRS_Direction_OptionFlight_Seg_Cmp_end = "\\s*</Compartment>.*$";
+    public static String CcitinRS_Direction_OptionFlight_Seg_Cmp_Class = "^\\s*<Class allowBooking=\"(?<allowBooking>\\d+)\" allowGroup=\"(?<allowGroup>\\d+)\" allowSale=\"(?<allowSale>\\d+)\" allowWaitList=\"(?<allowWaitList>\\d+)\" code=\"(?<ClsCode>[A-Z]{1})\" groupBooked=\"(?<groupBooked>\\d+)\" limit=\"(?<limit>\\d+)\" odAvailability=\"(?<odAvailability>\\d+)\" totalBooked=\"(?<totalBooked>\\d+)\".*$";
     
     // OTA_AirAvail
     public static String OTA_AirAvailRQ_start = "^.*<[A-Za-z0-9:]*OTA_AirAvailRQ.*$";

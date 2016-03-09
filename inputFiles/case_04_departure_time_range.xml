@@ -1,0 +1,1695 @@
+<!-- 
+CASE 04
+Departure Time Range
+-->
+
+<!-- Step #1 GSO to CCITIN-->
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+	<ns0:getCcitinOption xmlns:ns0="http://webservice.reservation.group.airline.prosrm.com/xsd">
+		<ns0:ccitinRequest><?xml version="1.0" encoding="UTF-8"?>
+		<Request version="1.0.0" airlineVendorID="LA">
+		  <Direction id="1" origin="LIM" destination="CUZ" cityPOS="SCL" countryPOS="CL" directFlightsOnly="no" allowOAL="no">
+		    <DepartureDate startDate="20160304" endDate="20160304" frequency="1111111" startTime="0340" endTime="0500" orientation="D"/>
+		  </Direction>
+		</Request>
+		</ns0:ccitinRequest>
+	</ns0:getCcitinOption>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+<!-- Step #2 Get Itinary options -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2011/10">
+   <soapenv:Body>
+      <ns:OTA_AirAvailRQ ReturnHostCommand="true" Version="2.2.0">
+         <ns:OptionalQualifiers>
+            <!-- <ns:AdditionalAvailability Ind="true" /> -->
+            <ns:FlightQualifiers Charters="false" DirectOnly="false" ExcludeCodeshares="true" Scan="false" />
+            <ns:TimeQualifiers>
+               <ns:DepartureTime WindowBefore="05:00" WindowAfter="03:40"/>
+            </ns:TimeQualifiers>
+         </ns:OptionalQualifiers>
+         <ns:OriginDestinationInformation>
+            <ns:FlightSegment DepartureDateTime="2016-03-04" >
+               <ns:DestinationLocation LocationCode="CUZ"/>
+               <ns:OriginLocation LocationCode="LIM"/>
+            </ns:FlightSegment>
+         </ns:OriginDestinationInformation>
+      </ns:OTA_AirAvailRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- Step #3 Itinary options reply from SABRE -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <OTA_AirAvailRS Version="2.2.0" xmlns="http://webservices.sabre.com/sabreXML/2011/10" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stl="http://services.sabre.com/STL/v01">
+         <stl:ApplicationResults status="Complete">
+            <stl:Success timeStamp="2016-03-03T11:40:22-06:00">
+               <stl:SystemSpecificResults>
+                  <stl:HostCommand LNIATA="739D81">104MARLIMCUZ0340-0500.</stl:HostCommand>
+               </stl:SystemSpecificResults>
+            </stl:Success>
+            <stl:Warning type="BusinessLogic">
+               <stl:SystemSpecificResults>
+                  <stl:Message>NO MORE</stl:Message>
+                  <stl:ShortText>WARN.SWS.HOST.WARNING_RESPONSE</stl:ShortText>
+               </stl:SystemSpecificResults>
+            </stl:Warning>
+         </stl:ApplicationResults>
+         <OriginDestinationOptions DestinationTimeZone="EST" OriginTimeZone="EST">
+            <OriginDestinationOption RPH="1">
+               <FlightSegment ArrivalDateTime="03-04T05:05" DOT_Ind="Y" DepartureDateTime="03-04T03:55" FlightNumber="2003" RPH="1" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="7" RPH="1" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="7" RPH="2" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="7" RPH="3" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="7" RPH="5" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="7" RPH="6" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="7" RPH="7" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="7" RPH="8" ResBookDesigCode="X"/>
+                  <BookingClassAvail Availability="7" RPH="9" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="7" RPH="10" ResBookDesigCode="N"/>
+                  <BookingClassAvail Availability="7" RPH="11" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="7" RPH="12" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="7" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="7" RPH="14" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="7" RPH="15" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="0" RPH="16" ResBookDesigCode="E"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="true" Sun="true" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="CUZ"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY AND MARKETED BY LAN PERU</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="319"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*">
+                     <Text>USD  20.00    SA-SEAT ASSIGNMENT</Text>
+                     <Text>0.00    BG-FIRST CHECKED BAG</Text>
+                     <Text>0.00    BG-SECOND CHECKED BAG</Text>
+                     <Text>0.00    BG-THIRD CHECKED BAG</Text>
+                     <Text>USD  19.00    BG-STANDARD BAGGAGE</Text>
+                  </FlightDetails>
+                  <MarketingAirline Code="LA" FlightNumber="2003"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="LIM"/>
+               </FlightSegment>
+            </OriginDestinationOption>
+            <OriginDestinationOption RPH="2">
+               <FlightSegment ArrivalDateTime="03-04T06:10" DOT_Ind="Y" DepartureDateTime="03-04T04:50" FlightNumber="2025" RPH="2" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="7" RPH="1" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="7" RPH="2" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="7" RPH="3" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="7" RPH="5" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="1" RPH="6" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="7" RPH="7" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="7" RPH="8" ResBookDesigCode="X"/>
+                  <BookingClassAvail Availability="7" RPH="9" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="7" RPH="10" ResBookDesigCode="N"/>
+                  <BookingClassAvail Availability="7" RPH="11" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="7" RPH="12" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="7" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="7" RPH="14" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="7" RPH="15" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="0" RPH="16" ResBookDesigCode="E"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="true" Sun="true" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="CUZ"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY AND MARKETED BY LAN PERU</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="320"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*">
+                     <Text>USD  20.00    SA-SEAT ASSIGNMENT</Text>
+                     <Text>0.00    BG-FIRST CHECKED BAG</Text>
+                     <Text>0.00    BG-SECOND CHECKED BAG</Text>
+                     <Text>0.00    BG-THIRD CHECKED BAG</Text>
+                     <Text>USD  19.00    BG-STANDARD BAGGAGE</Text>
+                  </FlightDetails>
+                  <MarketingAirline Code="LA" FlightNumber="2025"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="LIM"/>
+               </FlightSegment>
+            </OriginDestinationOption>
+            <OriginDestinationOption RPH="3">
+               <FlightSegment ArrivalDateTime="03-04T06:15" DOT_Ind="Y" DepartureDateTime="03-04T04:45" FlightNumber="2127" RPH="3" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="7" RPH="1" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="7" RPH="2" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="7" RPH="3" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="7" RPH="5" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="7" RPH="6" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="7" RPH="7" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="7" RPH="8" ResBookDesigCode="X"/>
+                  <BookingClassAvail Availability="7" RPH="9" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="7" RPH="10" ResBookDesigCode="N"/>
+                  <BookingClassAvail Availability="7" RPH="11" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="7" RPH="12" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="7" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="1" RPH="14" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="1" RPH="15" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="0" RPH="16" ResBookDesigCode="E"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="false" Sun="false" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="AQP"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY AND MARKETED BY LAN PERU</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="320"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*">
+                     <Text>USD  20.00    SA-SEAT ASSIGNMENT</Text>
+                     <Text>0.00    BG-FIRST CHECKED BAG</Text>
+                     <Text>0.00    BG-SECOND CHECKED BAG</Text>
+                     <Text>0.00    BG-THIRD CHECKED BAG</Text>
+                     <Text>USD  19.00    BG-STANDARD BAGGAGE</Text>
+                  </FlightDetails>
+                  <MarketingAirline Code="LA" FlightNumber="2127"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="LIM"/>
+               </FlightSegment>
+               <FlightSegment ArrivalDateTime="03-04T09:45" ConnectionInd="Y" DOT_Ind="Y" DepartureDateTime="03-04T08:45" FlightNumber="2094" RPH="4" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="7" RPH="1" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="7" RPH="2" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="7" RPH="3" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="7" RPH="5" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="7" RPH="6" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="7" RPH="7" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="7" RPH="8" ResBookDesigCode="X"/>
+                  <BookingClassAvail Availability="7" RPH="9" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="7" RPH="10" ResBookDesigCode="N"/>
+                  <BookingClassAvail Availability="7" RPH="11" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="7" RPH="12" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="7" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="7" RPH="14" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="7" RPH="15" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="0" RPH="16" ResBookDesigCode="E"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="true" Sun="true" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="CUZ"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY AND MARKETED BY LAN PERU</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="319"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*">
+                     <Text>USD  20.00    SA-SEAT ASSIGNMENT</Text>
+                     <Text>0.00    BG-FIRST CHECKED BAG</Text>
+                     <Text>0.00    BG-SECOND CHECKED BAG</Text>
+                     <Text>0.00    BG-THIRD CHECKED BAG</Text>
+                     <Text>USD  19.00    BG-STANDARD BAGGAGE</Text>
+                  </FlightDetails>
+                  <MarketingAirline Code="LA" FlightNumber="2094"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="AQP"/>
+               </FlightSegment>
+            </OriginDestinationOption>
+            <OriginDestinationOption RPH="4">
+               <FlightSegment ArrivalDateTime="03-04T06:30" DOT_Ind="Y" DepartureDateTime="03-04T05:00" FlightNumber="815" RPH="5" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="8" RPH="1" ResBookDesigCode="C"/>
+                  <BookingClassAvail Availability="8" RPH="2" ResBookDesigCode="J"/>
+                  <BookingClassAvail Availability="8" RPH="3" ResBookDesigCode="D"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="I"/>
+                  <BookingClassAvail Availability="9" RPH="5" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="9" RPH="6" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="9" RPH="7" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="9" RPH="8" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="9" RPH="9" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="9" RPH="10" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="9" RPH="11" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="9" RPH="12" ResBookDesigCode="E"/>
+                  <BookingClassAvail Availability="0" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="9" RPH="14" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="9" RPH="15" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="9" RPH="16" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="9" RPH="17" ResBookDesigCode="P"/>
+                  <BookingClassAvail Availability="9" RPH="18" ResBookDesigCode="Z"/>
+                  <BookingClassAvail Availability="9" RPH="19" ResBookDesigCode="W"/>
+                  <BookingClassAvail Availability="0" RPH="20" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="0" RPH="21" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="0" RPH="22" ResBookDesigCode="U"/>
+                  <BookingClassAvail Availability="0" RPH="23" ResBookDesigCode="X"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="true" Sun="true" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="AQP"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY /TRANS AMERICAN AIRLINES</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="320"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*"/>
+                  <MarketingAirline Code="AV" FlightNumber="815"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="LIM"/>
+               </FlightSegment>
+               <FlightSegment ArrivalDateTime="03-04T09:45" ConnectionInd="Y" DOT_Ind="Y" DepartureDateTime="03-04T08:45" FlightNumber="2094" RPH="6" SmokingAllowed="false" StopQuantity="0" eTicket="true">
+                  <BookingClassAvail Availability="7" RPH="1" ResBookDesigCode="Y"/>
+                  <BookingClassAvail Availability="7" RPH="2" ResBookDesigCode="B"/>
+                  <BookingClassAvail Availability="7" RPH="3" ResBookDesigCode="H"/>
+                  <BookingClassAvail Availability="7" RPH="4" ResBookDesigCode="K"/>
+                  <BookingClassAvail Availability="7" RPH="5" ResBookDesigCode="M"/>
+                  <BookingClassAvail Availability="7" RPH="6" ResBookDesigCode="L"/>
+                  <BookingClassAvail Availability="7" RPH="7" ResBookDesigCode="V"/>
+                  <BookingClassAvail Availability="7" RPH="8" ResBookDesigCode="X"/>
+                  <BookingClassAvail Availability="7" RPH="9" ResBookDesigCode="S"/>
+                  <BookingClassAvail Availability="7" RPH="10" ResBookDesigCode="N"/>
+                  <BookingClassAvail Availability="7" RPH="11" ResBookDesigCode="Q"/>
+                  <BookingClassAvail Availability="7" RPH="12" ResBookDesigCode="O"/>
+                  <BookingClassAvail Availability="7" RPH="13" ResBookDesigCode="G"/>
+                  <BookingClassAvail Availability="7" RPH="14" ResBookDesigCode="T"/>
+                  <BookingClassAvail Availability="7" RPH="15" ResBookDesigCode="A"/>
+                  <BookingClassAvail Availability="0" RPH="16" ResBookDesigCode="E"/>
+                  <DaysOfOperation>
+                     <OperationSchedule>
+                        <OperationTimes>
+                           <OperationTime Fri="true" Mon="true" Sat="true" Sun="true" Thur="true" Tue="true" Weds="true"/>
+                        </OperationTimes>
+                     </OperationSchedule>
+                  </DaysOfOperation>
+                  <DestinationLocation LocationCode="CUZ"/>
+                  <DisclosureAirline Code="**">
+                     <Text>OPERATED BY AND MARKETED BY LAN PERU</Text>
+                  </DisclosureAirline>
+                  <Equipment AirEquipType="319"/>
+                  <FlightDetails Canceled="false" Charter="false" CodeshareBlockDisplay="*">
+                     <Text>USD  20.00    SA-SEAT ASSIGNMENT</Text>
+                     <Text>0.00    BG-FIRST CHECKED BAG</Text>
+                     <Text>0.00    BG-SECOND CHECKED BAG</Text>
+                     <Text>0.00    BG-THIRD CHECKED BAG</Text>
+                     <Text>USD  19.00    BG-STANDARD BAGGAGE</Text>
+                  </FlightDetails>
+                  <MarketingAirline Code="LA" FlightNumber="2094"/>
+                  <Meal MealCode="S"/>
+                  <OriginLocation LocationCode="AQP"/>
+               </FlightSegment>
+            </OriginDestinationOption>
+         </OriginDestinationOptions>
+      </OTA_AirAvailRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- Step #4 -->
+<!-- RPH 1 -->
+<!-- AirInventoryRTDPDisplayRQ -->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+	<SOAP-ENV:Body>
+		<AirInventoryRTDPDisplayRQ RTDP="true" TimeStamp="2011-07-28T10:27:50" Version="1">
+			<UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL" POSID="" PseudoCityCode=""/>
+			<Segment Action="true" AirlineCode="LA" DepartureDate="2016-03-04" Destination="CUZ" FlightNumber="2003" Origin="LIM"/>
+			<OnDInfo Destination="CUZ" Origin="LIM"/>
+			<RPIInfo NoOfSeats="1"/>
+		</AirInventoryRTDPDisplayRQ>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<!-- AirInventoryRTDPDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <AirInventoryRTDPDisplayRS TimeStamp="2016-03-03T11:45:07" Version="1" xmlns="http://www.sabre.com/ns/SSI/1.0">
+         <UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL"/>
+         <Segment Action="true" AirlineCode="LA" ArrivalTime="505" DepartureDate="2016-03-04" DepartureTime="355" Destination="CUZ" FareclassAvlSeq="YBHKMLVXSNQOGTAE" FlightNumber="2003" NoOfLegs="1" Origin="LIM" RTDPActive="false">
+            <SeatsAvail>
+               <Seats Class="A" xmlns="">15</Seats>
+               <Seats Class="B" xmlns="">90</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">19</Seats>
+               <Seats Class="H" xmlns="">90</Seats>
+               <Seats Class="K" xmlns="">90</Seats>
+               <Seats Class="L" xmlns="">81</Seats>
+               <Seats Class="M" xmlns="">83</Seats>
+               <Seats Class="N" xmlns="">42</Seats>
+               <Seats Class="O" xmlns="">22</Seats>
+               <Seats Class="Q" xmlns="">30</Seats>
+               <Seats Class="S" xmlns="">58</Seats>
+               <Seats Class="T" xmlns="">15</Seats>
+               <Seats Class="V" xmlns="">71</Seats>
+               <Seats Class="X" xmlns="">64</Seats>
+               <Seats Class="Y" xmlns="">95</Seats>
+            </SeatsAvail>
+            <RTDPAvail>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">95</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">95</Seats>
+               <Seats Class="K" xmlns="">95</Seats>
+               <Seats Class="L" xmlns="">95</Seats>
+               <Seats Class="M" xmlns="">95</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">95</Seats>
+               <Seats Class="X" xmlns="">90</Seats>
+               <Seats Class="Y" xmlns="">95</Seats>
+            </RTDPAvail>
+            <SeatsSold>
+               <Seats Class="A" xmlns="">37</Seats>
+               <Seats Class="B" xmlns="">1</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">7</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">0</Seats>
+               <Seats Class="M" xmlns="">1</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">8</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">2</Seats>
+            </SeatsSold>
+            <WaitlistSeats>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">0</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">0</Seats>
+            </WaitlistSeats>
+            <WaitlistStatus>
+               <Status Class="A" xmlns="">false</Status>
+               <Status Class="B" xmlns="">false</Status>
+               <Status Class="E" xmlns="">false</Status>
+               <Status Class="G" xmlns="">false</Status>
+               <Status Class="H" xmlns="">false</Status>
+               <Status Class="K" xmlns="">false</Status>
+               <Status Class="L" xmlns="">false</Status>
+               <Status Class="M" xmlns="">false</Status>
+               <Status Class="N" xmlns="">false</Status>
+               <Status Class="O" xmlns="">false</Status>
+               <Status Class="Q" xmlns="">false</Status>
+               <Status Class="S" xmlns="">false</Status>
+               <Status Class="T" xmlns="">false</Status>
+               <Status Class="V" xmlns="">false</Status>
+               <Status Class="X" xmlns="">false</Status>
+               <Status Class="Y" xmlns="">false</Status>
+            </WaitlistStatus>
+            <Leg AirlineCode="LA" ArrivalTime="505" Cabins="FJY" DepartureDate="2016-03-04" DepartureTime="355" Destination="CUZ" FareCabins="YYJJYFYYJJYYYYYJYJYYJYJYYJ" FlightNumber="2003" Origin="LIM" RTDPActive="false">
+               <CabinCapacities>
+                  <Cabin Index="3" xmlns="">144</Cabin>
+               </CabinCapacities>
+               <CabinAuth>
+                  <Cabin Index="3" xmlns="">151</Cabin>
+               </CabinAuth>
+               <CabinSeatsSold>
+                  <Cabin Index="3" xmlns="">56</Cabin>
+               </CabinSeatsSold>
+               <CabinSeatsAvail>
+                  <Cabin Index="3" xmlns="">95</Cabin>
+               </CabinSeatsAvail>
+            </Leg>
+         </Segment>
+         <OnDInfo Destination="CUZ" Origin="LIM">
+            <SegIndex>1</SegIndex>
+            <Fares AdjustedFareValue="16" BidPrice="32" Class="A" FareValue="16"/>
+            <Fares AdjustedFareValue="231" BidPrice="32" Class="B" FareValue="231"/>
+            <Fares AdjustedFareValue="1" BidPrice="32" Class="E" FareValue="0"/>
+            <Fares AdjustedFareValue="22" BidPrice="32" Class="G" FareValue="22"/>
+            <Fares AdjustedFareValue="212" BidPrice="32" Class="H" FareValue="212"/>
+            <Fares AdjustedFareValue="163" BidPrice="32" Class="K" FareValue="163"/>
+            <Fares AdjustedFareValue="145" BidPrice="32" Class="L" FareValue="145"/>
+            <Fares AdjustedFareValue="123" BidPrice="32" Class="M" FareValue="123"/>
+            <Fares AdjustedFareValue="67" BidPrice="32" Class="N" FareValue="67"/>
+            <Fares AdjustedFareValue="51" BidPrice="32" Class="O" FareValue="51"/>
+            <Fares AdjustedFareValue="60" BidPrice="32" Class="Q" FareValue="60"/>
+            <Fares AdjustedFareValue="77" BidPrice="32" Class="S" FareValue="77"/>
+            <Fares AdjustedFareValue="19" BidPrice="32" Class="T" FareValue="19"/>
+            <Fares AdjustedFareValue="111" BidPrice="32" Class="V" FareValue="111"/>
+            <Fares AdjustedFareValue="92" BidPrice="32" Class="X" FareValue="92"/>
+            <Fares AdjustedFareValue="242" BidPrice="32" Class="Y" FareValue="242"/>
+         </OnDInfo>
+         <RPIInfo NoOfSeats="1"/>
+      </AirInventoryRTDPDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- InventoryControlFlightDisplayRQ -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://www.sabre.com/ns/SSI/1.0">
+   <soapenv:Body>
+      <InventoryControlFlightDisplayRQ Version="4.3.1" TimeStamp="2016-02-02T12:17:58-06:00">
+         <FlightDisplay>
+            <ns:User id="">
+               <ns:POS/>
+               <ns:PCC/>
+               <ns:Carrier/>
+               <ns:City/>
+               <ns:Country/>
+               <ns:Type/>
+            </ns:User>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2003</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- InventoryControlFlightDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <InventoryControlFlightDisplayRS TimeStamp="2016-03-03T11:46:40" Version="4.3.1" xmlns="http://www.sabre.com/ns/SSI/1.0" xmlns:shdr="http://services.sabre.com/ns/SOTA/Messaging/v1">
+         <Header.RS>
+            <shdr:Results status="Complete">
+               <shdr:Success/>
+            </shdr:Results>
+         </Header.RS>
+         <FlightDisplay>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2003</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+            <Segment>
+               <Origin>LIM</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <FltNum>2003</FltNum>
+               <NumLegs>1</NumLegs>
+               <MaxSeats/>
+               <MaxSeatsLoadFactor/>
+               <MinSeats/>
+               <MinSeatsLoadFactor/>
+               <Waitlist/>
+               <SeatsSold>
+                  <Seats class="A">37</Seats>
+                  <Seats class="B">1</Seats>
+                  <Seats class="G">7</Seats>
+                  <Seats class="M">1</Seats>
+                  <Seats class="T">8</Seats>
+                  <Seats class="Y">2</Seats>
+               </SeatsSold>
+               <WaitlistClosed/>
+               <TicketedCounts>
+                  <Seats class="A">37</Seats>
+                  <Seats class="B">1</Seats>
+                  <Seats class="G">7</Seats>
+                  <Seats class="M">1</Seats>
+                  <Seats class="N">1</Seats>
+                  <Seats class="T">8</Seats>
+               </TicketedCounts>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <ArrivalTime>0505</ArrivalTime>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0355</DepartureTime>
+               <FareClassAvlSeq>YBHKMLVXSNQOGTAE</FareClassAvlSeq>
+            </Segment>
+            <Leg>
+               <Origin>LIM</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0355</DepartureTime>
+               <ArrivalTime>0505</ArrivalTime>
+               <Configuration>A04</Configuration>
+               <NestingID>10</NestingID>
+               <Status>Open</Status>
+               <BlockClearance>false</BlockClearance>
+               <NestingOrder>
+                  <Cabin index="1">F</Cabin>
+                  <Cabin index="2">JCDIZUWPR</Cabin>
+                  <Cabin index="3">YBHKMLVXSNQOGTAE</Cabin>
+               </NestingOrder>
+               <Capacities>
+                  <Cabin index="1">0</Cabin>
+                  <Cabin index="2">0</Cabin>
+                  <Cabin index="3">144</Cabin>
+               </Capacities>
+               <SeatsSold>
+                  <Seats class="A">37</Seats>
+                  <Seats class="B">1</Seats>
+                  <Seats class="G">7</Seats>
+                  <Seats class="M">1</Seats>
+                  <Seats class="T">8</Seats>
+                  <Seats class="Y">2</Seats>
+               </SeatsSold>
+               <LegAuth>
+                  <Seats class="A">60</Seats>
+                  <Seats class="B">144</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">71</Seats>
+                  <Seats class="H">143</Seats>
+                  <Seats class="K">143</Seats>
+                  <Seats class="L">133</Seats>
+                  <Seats class="M">136</Seats>
+                  <Seats class="N">94</Seats>
+                  <Seats class="O">74</Seats>
+                  <Seats class="Q">82</Seats>
+                  <Seats class="S">110</Seats>
+                  <Seats class="T">60</Seats>
+                  <Seats class="V">123</Seats>
+                  <Seats class="X">116</Seats>
+                  <Seats class="Y">151</Seats>
+               </LegAuth>
+               <LegAvl>
+                  <Seats class="A">23</Seats>
+                  <Seats class="B">90</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">19</Seats>
+                  <Seats class="H">90</Seats>
+                  <Seats class="K">90</Seats>
+                  <Seats class="L">81</Seats>
+                  <Seats class="M">83</Seats>
+                  <Seats class="N">42</Seats>
+                  <Seats class="O">22</Seats>
+                  <Seats class="Q">30</Seats>
+                  <Seats class="S">58</Seats>
+                  <Seats class="T">15</Seats>
+                  <Seats class="V">71</Seats>
+                  <Seats class="X">64</Seats>
+                  <Seats class="Y">95</Seats>
+               </LegAvl>
+               <BlockSpace>0</BlockSpace>
+               <Marketing>false</Marketing>
+               <CabinBaseClasses>FJY</CabinBaseClasses>
+               <PartnerFlights>
+                  <PartnerFlight>
+                     <Carrier>AA</Carrier>
+                     <FltNum>7260</FltNum>
+                  </PartnerFlight>
+               </PartnerFlights>
+               <CommentIndex>0</CommentIndex>
+               <ServiceType>J</ServiceType>
+               <Operating>true</Operating>
+               <Shared>false</Shared>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <CabinSeatsSold>
+                  <Cabin index="3">56</Cabin>
+               </CabinSeatsSold>
+               <EquipmentID>319</EquipmentID>
+               <OperatingCarrier>LA</OperatingCarrier>
+               <OperatingFltNum>2003</OperatingFltNum>
+            </Leg>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- RPH 2-->
+<!-- AirInventoryRTDPDisplayRQ -->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+	<SOAP-ENV:Body>
+		<AirInventoryRTDPDisplayRQ RTDP="true" TimeStamp="2011-07-28T10:27:50" Version="1">
+			<UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL" POSID="" PseudoCityCode=""/>
+			<Segment Action="true" AirlineCode="LA" DepartureDate="2016-03-04" Destination="CUZ" FlightNumber="2025" Origin="LIM"/>
+			<OnDInfo Destination="CUZ" Origin="LIM"/>
+			<RPIInfo NoOfSeats="1"/>
+		</AirInventoryRTDPDisplayRQ>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<!-- AirInventoryRTDPDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <AirInventoryRTDPDisplayRS TimeStamp="2016-03-03T11:48:01" Version="1" xmlns="http://www.sabre.com/ns/SSI/1.0">
+         <UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL"/>
+         <Segment Action="true" AirlineCode="LA" ArrivalTime="610" DepartureDate="2016-03-04" DepartureTime="450" Destination="CUZ" FareclassAvlSeq="YBHKMLVXSNQOGTAE" FlightNumber="2025" NoOfLegs="1" Origin="LIM" RTDPActive="false">
+            <SeatsAvail>
+               <Seats Class="A" xmlns="">59</Seats>
+               <Seats Class="B" xmlns="">160</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">72</Seats>
+               <Seats Class="H" xmlns="">153</Seats>
+               <Seats Class="K" xmlns="">153</Seats>
+               <Seats Class="L" xmlns="">1</Seats>
+               <Seats Class="M" xmlns="">153</Seats>
+               <Seats Class="N" xmlns="">97</Seats>
+               <Seats Class="O" xmlns="">75</Seats>
+               <Seats Class="Q" xmlns="">84</Seats>
+               <Seats Class="S" xmlns="">127</Seats>
+               <Seats Class="T" xmlns="">59</Seats>
+               <Seats Class="V" xmlns="">142</Seats>
+               <Seats Class="X" xmlns="">134</Seats>
+               <Seats Class="Y" xmlns="">163</Seats>
+            </SeatsAvail>
+            <RTDPAvail>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">163</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">163</Seats>
+               <Seats Class="K" xmlns="">163</Seats>
+               <Seats Class="L" xmlns="">163</Seats>
+               <Seats Class="M" xmlns="">163</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">163</Seats>
+               <Seats Class="X" xmlns="">163</Seats>
+               <Seats Class="Y" xmlns="">163</Seats>
+            </RTDPAvail>
+            <SeatsSold>
+               <Seats Class="A" xmlns="">4</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">3</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">1</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">10</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">2</Seats>
+            </SeatsSold>
+            <WaitlistSeats>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">0</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">0</Seats>
+            </WaitlistSeats>
+            <WaitlistStatus>
+               <Status Class="A" xmlns="">false</Status>
+               <Status Class="B" xmlns="">false</Status>
+               <Status Class="E" xmlns="">false</Status>
+               <Status Class="G" xmlns="">false</Status>
+               <Status Class="H" xmlns="">false</Status>
+               <Status Class="K" xmlns="">false</Status>
+               <Status Class="L" xmlns="">false</Status>
+               <Status Class="M" xmlns="">false</Status>
+               <Status Class="N" xmlns="">false</Status>
+               <Status Class="O" xmlns="">false</Status>
+               <Status Class="Q" xmlns="">false</Status>
+               <Status Class="S" xmlns="">false</Status>
+               <Status Class="T" xmlns="">false</Status>
+               <Status Class="V" xmlns="">false</Status>
+               <Status Class="X" xmlns="">false</Status>
+               <Status Class="Y" xmlns="">false</Status>
+            </WaitlistStatus>
+            <Leg AirlineCode="LA" ArrivalTime="610" Cabins="FJY" DepartureDate="2016-03-04" DepartureTime="450" Destination="CUZ" FareCabins="YYJJYFYYJJYYYYYJYJYYJYJYYJ" FlightNumber="2025" Origin="LIM" RTDPActive="false">
+               <CabinCapacities>
+                  <Cabin Index="3" xmlns="">174</Cabin>
+               </CabinCapacities>
+               <CabinAuth>
+                  <Cabin Index="3" xmlns="">183</Cabin>
+               </CabinAuth>
+               <CabinSeatsSold>
+                  <Cabin Index="3" xmlns="">20</Cabin>
+               </CabinSeatsSold>
+               <CabinSeatsAvail>
+                  <Cabin Index="3" xmlns="">163</Cabin>
+               </CabinSeatsAvail>
+            </Leg>
+         </Segment>
+         <OnDInfo Destination="CUZ" Origin="LIM">
+            <SegIndex>1</SegIndex>
+            <Fares AdjustedFareValue="16" BidPrice="1" Class="A" FareValue="16"/>
+            <Fares AdjustedFareValue="231" BidPrice="1" Class="B" FareValue="231"/>
+            <Fares AdjustedFareValue="1" BidPrice="1" Class="E" FareValue="0"/>
+            <Fares AdjustedFareValue="22" BidPrice="1" Class="G" FareValue="22"/>
+            <Fares AdjustedFareValue="212" BidPrice="1" Class="H" FareValue="212"/>
+            <Fares AdjustedFareValue="163" BidPrice="1" Class="K" FareValue="163"/>
+            <Fares AdjustedFareValue="145" BidPrice="1" Class="L" FareValue="145"/>
+            <Fares AdjustedFareValue="123" BidPrice="1" Class="M" FareValue="123"/>
+            <Fares AdjustedFareValue="67" BidPrice="1" Class="N" FareValue="67"/>
+            <Fares AdjustedFareValue="51" BidPrice="1" Class="O" FareValue="51"/>
+            <Fares AdjustedFareValue="60" BidPrice="1" Class="Q" FareValue="60"/>
+            <Fares AdjustedFareValue="77" BidPrice="1" Class="S" FareValue="77"/>
+            <Fares AdjustedFareValue="19" BidPrice="1" Class="T" FareValue="19"/>
+            <Fares AdjustedFareValue="111" BidPrice="1" Class="V" FareValue="111"/>
+            <Fares AdjustedFareValue="92" BidPrice="1" Class="X" FareValue="92"/>
+            <Fares AdjustedFareValue="242" BidPrice="1" Class="Y" FareValue="242"/>
+         </OnDInfo>
+         <RPIInfo NoOfSeats="1"/>
+      </AirInventoryRTDPDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- InventoryControlFlightDisplayRQ -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://www.sabre.com/ns/SSI/1.0">
+   <soapenv:Body>
+      <InventoryControlFlightDisplayRQ Version="4.3.1" TimeStamp="2016-02-02T12:17:58-06:00">
+         <FlightDisplay>
+            <ns:User id="">
+               <ns:POS/>
+               <ns:PCC/>
+               <ns:Carrier/>
+               <ns:City/>
+               <ns:Country/>
+               <ns:Type/>
+            </ns:User>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2025</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- InventoryControlFlightDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <InventoryControlFlightDisplayRS TimeStamp="2016-03-03T11:48:50" Version="4.3.1" xmlns="http://www.sabre.com/ns/SSI/1.0" xmlns:shdr="http://services.sabre.com/ns/SOTA/Messaging/v1">
+         <Header.RS>
+            <shdr:Results status="Complete">
+               <shdr:Success/>
+            </shdr:Results>
+         </Header.RS>
+         <FlightDisplay>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2025</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+            <Segment>
+               <Origin>LIM</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <FltNum>2025</FltNum>
+               <NumLegs>1</NumLegs>
+               <MaxSeats>
+                  <Seats class="L">4</Seats>
+               </MaxSeats>
+               <MaxSeatsLoadFactor>
+                  <LoadFactor class="L">0</LoadFactor>
+               </MaxSeatsLoadFactor>
+               <MinSeats/>
+               <MinSeatsLoadFactor/>
+               <Waitlist/>
+               <SeatsSold>
+                  <Seats class="A">4</Seats>
+                  <Seats class="L">3</Seats>
+                  <Seats class="O">1</Seats>
+                  <Seats class="T">10</Seats>
+                  <Seats class="Y">2</Seats>
+               </SeatsSold>
+               <WaitlistClosed/>
+               <TicketedCounts>
+                  <Seats class="A">5</Seats>
+                  <Seats class="L">3</Seats>
+                  <Seats class="O">1</Seats>
+                  <Seats class="T">10</Seats>
+               </TicketedCounts>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <ArrivalTime>0610</ArrivalTime>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0450</DepartureTime>
+               <FareClassAvlSeq>YBHKMLVXSNQOGTAE</FareClassAvlSeq>
+            </Segment>
+            <Leg>
+               <Origin>LIM</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0450</DepartureTime>
+               <ArrivalTime>0610</ArrivalTime>
+               <Configuration>A46</Configuration>
+               <NestingID>10</NestingID>
+               <Status>Open</Status>
+               <BlockClearance>false</BlockClearance>
+               <NestingOrder>
+                  <Cabin index="1">F</Cabin>
+                  <Cabin index="2">JCDIZUWPR</Cabin>
+                  <Cabin index="3">YBHKMLVXSNQOGTAE</Cabin>
+               </NestingOrder>
+               <Capacities>
+                  <Cabin index="1">0</Cabin>
+                  <Cabin index="2">0</Cabin>
+                  <Cabin index="3">174</Cabin>
+               </Capacities>
+               <SeatsSold>
+                  <Seats class="A">4</Seats>
+                  <Seats class="L">3</Seats>
+                  <Seats class="O">1</Seats>
+                  <Seats class="T">10</Seats>
+                  <Seats class="Y">2</Seats>
+               </SeatsSold>
+               <LegAuth>
+                  <Seats class="A">73</Seats>
+                  <Seats class="B">178</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">86</Seats>
+                  <Seats class="H">171</Seats>
+                  <Seats class="K">171</Seats>
+                  <Seats class="L">169</Seats>
+                  <Seats class="M">171</Seats>
+                  <Seats class="N">112</Seats>
+                  <Seats class="O">90</Seats>
+                  <Seats class="Q">99</Seats>
+                  <Seats class="S">142</Seats>
+                  <Seats class="T">73</Seats>
+                  <Seats class="V">157</Seats>
+                  <Seats class="X">149</Seats>
+                  <Seats class="Y">183</Seats>
+               </LegAuth>
+               <LegAvl>
+                  <Seats class="A">69</Seats>
+                  <Seats class="B">160</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">72</Seats>
+                  <Seats class="H">153</Seats>
+                  <Seats class="K">153</Seats>
+                  <Seats class="L">151</Seats>
+                  <Seats class="M">153</Seats>
+                  <Seats class="N">97</Seats>
+                  <Seats class="O">75</Seats>
+                  <Seats class="Q">84</Seats>
+                  <Seats class="S">127</Seats>
+                  <Seats class="T">59</Seats>
+                  <Seats class="V">142</Seats>
+                  <Seats class="X">134</Seats>
+                  <Seats class="Y">163</Seats>
+               </LegAvl>
+               <BlockSpace>0</BlockSpace>
+               <Marketing>false</Marketing>
+               <CabinBaseClasses>FJY</CabinBaseClasses>
+               <PartnerFlights>
+                  <PartnerFlight>
+                     <Carrier>AM</Carrier>
+                     <FltNum>8060</FltNum>
+                  </PartnerFlight>
+                  <PartnerFlight>
+                     <Carrier>JJ</Carrier>
+                     <FltNum>8710</FltNum>
+                  </PartnerFlight>
+               </PartnerFlights>
+               <CommentIndex>0</CommentIndex>
+               <ServiceType>J</ServiceType>
+               <Operating>true</Operating>
+               <Shared>false</Shared>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <CabinSeatsSold>
+                  <Cabin index="3">20</Cabin>
+               </CabinSeatsSold>
+               <EquipmentID>320</EquipmentID>
+               <OperatingCarrier>LA</OperatingCarrier>
+               <OperatingFltNum>2025</OperatingFltNum>
+            </Leg>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- RPH 3-->
+<!-- AirInventoryRTDPDisplayRQ -->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+	<SOAP-ENV:Body>
+		<AirInventoryRTDPDisplayRQ RTDP="true" TimeStamp="2011-07-28T10:27:50" Version="1">
+			<UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL" POSID="" PseudoCityCode=""/>
+			<Segment Action="true" AirlineCode="LA" DepartureDate="2016-03-04" Destination="AQP" FlightNumber="2127" Origin="LIM"/>
+			<Segment Action="true" AirlineCode="LA" DepartureDate="2016-03-04" Destination="CUZ" FlightNumber="2094" Origin="AQP"/>
+			<OnDInfo Destination="CUZ" Origin="LIM"/>
+			<RPIInfo NoOfSeats="1"/>
+		</AirInventoryRTDPDisplayRQ>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+<!-- AirInventoryRTDPDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <AirInventoryRTDPDisplayRS TimeStamp="2016-03-03T11:52:41" Version="1" xmlns="http://www.sabre.com/ns/SSI/1.0">
+         <UserInfo AirlineGDS="LA" ID="AAAA" POSCity="SCL" POSCountry="CL"/>
+         <Segment Action="true" AirlineCode="LA" ArrivalTime="615" DepartureDate="2016-03-04" DepartureTime="445" Destination="AQP" FareclassAvlSeq="YBHKMLVXSNQOGTAE" FlightNumber="2127" NoOfLegs="1" Origin="LIM" RTDPActive="false">
+            <SeatsAvail>
+               <Seats Class="A" xmlns="">1</Seats>
+               <Seats Class="B" xmlns="">96</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">23</Seats>
+               <Seats Class="H" xmlns="">96</Seats>
+               <Seats Class="K" xmlns="">96</Seats>
+               <Seats Class="L" xmlns="">95</Seats>
+               <Seats Class="M" xmlns="">96</Seats>
+               <Seats Class="N" xmlns="">73</Seats>
+               <Seats Class="O" xmlns="">44</Seats>
+               <Seats Class="Q" xmlns="">60</Seats>
+               <Seats Class="S" xmlns="">84</Seats>
+               <Seats Class="T" xmlns="">1</Seats>
+               <Seats Class="V" xmlns="">93</Seats>
+               <Seats Class="X" xmlns="">92</Seats>
+               <Seats Class="Y" xmlns="">96</Seats>
+            </SeatsAvail>
+            <RTDPAvail>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">96</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">96</Seats>
+               <Seats Class="K" xmlns="">96</Seats>
+               <Seats Class="L" xmlns="">96</Seats>
+               <Seats Class="M" xmlns="">96</Seats>
+               <Seats Class="N" xmlns="">96</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">94</Seats>
+               <Seats Class="S" xmlns="">96</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">96</Seats>
+               <Seats Class="X" xmlns="">96</Seats>
+               <Seats Class="Y" xmlns="">96</Seats>
+            </RTDPAvail>
+            <SeatsSold>
+               <Seats Class="A" xmlns="">68</Seats>
+               <Seats Class="B" xmlns="">5</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">5</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">1</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">1</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">4</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">1</Seats>
+            </SeatsSold>
+            <WaitlistSeats>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">0</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">0</Seats>
+            </WaitlistSeats>
+            <WaitlistStatus>
+               <Status Class="A" xmlns="">false</Status>
+               <Status Class="B" xmlns="">false</Status>
+               <Status Class="E" xmlns="">false</Status>
+               <Status Class="G" xmlns="">false</Status>
+               <Status Class="H" xmlns="">false</Status>
+               <Status Class="K" xmlns="">false</Status>
+               <Status Class="L" xmlns="">false</Status>
+               <Status Class="M" xmlns="">false</Status>
+               <Status Class="N" xmlns="">false</Status>
+               <Status Class="O" xmlns="">false</Status>
+               <Status Class="Q" xmlns="">false</Status>
+               <Status Class="S" xmlns="">false</Status>
+               <Status Class="T" xmlns="">false</Status>
+               <Status Class="V" xmlns="">false</Status>
+               <Status Class="X" xmlns="">false</Status>
+               <Status Class="Y" xmlns="">false</Status>
+            </WaitlistStatus>
+            <Leg AirlineCode="LA" ArrivalTime="615" Cabins="FJY" DepartureDate="2016-03-04" DepartureTime="445" Destination="AQP" FareCabins="YYJJYFYYJJYYYYYJYJYYJYJYYJ" FlightNumber="2127" Origin="LIM" RTDPActive="false">
+               <CabinCapacities>
+                  <Cabin Index="3" xmlns="">174</Cabin>
+               </CabinCapacities>
+               <CabinAuth>
+                  <Cabin Index="3" xmlns="">181</Cabin>
+               </CabinAuth>
+               <CabinSeatsSold>
+                  <Cabin Index="3" xmlns="">85</Cabin>
+               </CabinSeatsSold>
+               <CabinSeatsAvail>
+                  <Cabin Index="3" xmlns="">96</Cabin>
+               </CabinSeatsAvail>
+            </Leg>
+         </Segment>
+         <Segment Action="true" AirlineCode="LA" ArrivalTime="945" DepartureDate="2016-03-04" DepartureTime="845" Destination="CUZ" FareclassAvlSeq="YBHKMLVXSNQOGTAE" FlightNumber="2094" NoOfLegs="1" Origin="AQP" RTDPActive="false">
+            <SeatsAvail>
+               <Seats Class="A" xmlns="">15</Seats>
+               <Seats Class="B" xmlns="">124</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">29</Seats>
+               <Seats Class="H" xmlns="">121</Seats>
+               <Seats Class="K" xmlns="">118</Seats>
+               <Seats Class="L" xmlns="">110</Seats>
+               <Seats Class="M" xmlns="">113</Seats>
+               <Seats Class="N" xmlns="">81</Seats>
+               <Seats Class="O" xmlns="">49</Seats>
+               <Seats Class="Q" xmlns="">65</Seats>
+               <Seats Class="S" xmlns="">95</Seats>
+               <Seats Class="T" xmlns="">15</Seats>
+               <Seats Class="V" xmlns="">102</Seats>
+               <Seats Class="X" xmlns="">95</Seats>
+               <Seats Class="Y" xmlns="">127</Seats>
+            </SeatsAvail>
+            <RTDPAvail>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">96</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">96</Seats>
+               <Seats Class="K" xmlns="">96</Seats>
+               <Seats Class="L" xmlns="">96</Seats>
+               <Seats Class="M" xmlns="">96</Seats>
+               <Seats Class="N" xmlns="">96</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">94</Seats>
+               <Seats Class="S" xmlns="">96</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">96</Seats>
+               <Seats Class="X" xmlns="">96</Seats>
+               <Seats Class="Y" xmlns="">96</Seats>
+            </RTDPAvail>
+            <SeatsSold>
+               <Seats Class="A" xmlns="">16</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">2</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">1</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">4</Seats>
+            </SeatsSold>
+            <WaitlistSeats>
+               <Seats Class="A" xmlns="">0</Seats>
+               <Seats Class="B" xmlns="">0</Seats>
+               <Seats Class="E" xmlns="">0</Seats>
+               <Seats Class="G" xmlns="">0</Seats>
+               <Seats Class="H" xmlns="">0</Seats>
+               <Seats Class="K" xmlns="">0</Seats>
+               <Seats Class="L" xmlns="">0</Seats>
+               <Seats Class="M" xmlns="">0</Seats>
+               <Seats Class="N" xmlns="">0</Seats>
+               <Seats Class="O" xmlns="">0</Seats>
+               <Seats Class="Q" xmlns="">0</Seats>
+               <Seats Class="S" xmlns="">0</Seats>
+               <Seats Class="T" xmlns="">0</Seats>
+               <Seats Class="V" xmlns="">0</Seats>
+               <Seats Class="X" xmlns="">0</Seats>
+               <Seats Class="Y" xmlns="">0</Seats>
+            </WaitlistSeats>
+            <WaitlistStatus>
+               <Status Class="A" xmlns="">false</Status>
+               <Status Class="B" xmlns="">false</Status>
+               <Status Class="E" xmlns="">false</Status>
+               <Status Class="G" xmlns="">false</Status>
+               <Status Class="H" xmlns="">false</Status>
+               <Status Class="K" xmlns="">false</Status>
+               <Status Class="L" xmlns="">false</Status>
+               <Status Class="M" xmlns="">false</Status>
+               <Status Class="N" xmlns="">false</Status>
+               <Status Class="O" xmlns="">false</Status>
+               <Status Class="Q" xmlns="">false</Status>
+               <Status Class="S" xmlns="">false</Status>
+               <Status Class="T" xmlns="">false</Status>
+               <Status Class="V" xmlns="">false</Status>
+               <Status Class="X" xmlns="">false</Status>
+               <Status Class="Y" xmlns="">false</Status>
+            </WaitlistStatus>
+            <Leg AirlineCode="LA" ArrivalTime="945" Cabins="FJY" DepartureDate="2016-03-04" DepartureTime="845" Destination="CUZ" FareCabins="YYJJYFYYJJYYYYYJYJYYJYJYYJ" FlightNumber="2094" Origin="AQP" RTDPActive="false">
+               <CabinCapacities>
+                  <Cabin Index="3" xmlns="">144</Cabin>
+               </CabinCapacities>
+               <CabinAuth>
+                  <Cabin Index="3" xmlns="">150</Cabin>
+               </CabinAuth>
+               <CabinSeatsSold>
+                  <Cabin Index="3" xmlns="">23</Cabin>
+               </CabinSeatsSold>
+               <CabinSeatsAvail>
+                  <Cabin Index="3" xmlns="">127</Cabin>
+               </CabinSeatsAvail>
+            </Leg>
+         </Segment>
+         <OnDInfo Destination="CUZ" Origin="LIM">
+            <SegIndex>1</SegIndex>
+            <SegIndex>2</SegIndex>
+            <Fares AdjustedFareValue="16" BidPrice="26" Class="A" FareValue="16"/>
+            <Fares AdjustedFareValue="231" BidPrice="26" Class="B" FareValue="231"/>
+            <Fares AdjustedFareValue="1" BidPrice="26" Class="E" FareValue="0"/>
+            <Fares AdjustedFareValue="22" BidPrice="26" Class="G" FareValue="22"/>
+            <Fares AdjustedFareValue="212" BidPrice="26" Class="H" FareValue="212"/>
+            <Fares AdjustedFareValue="163" BidPrice="26" Class="K" FareValue="163"/>
+            <Fares AdjustedFareValue="145" BidPrice="26" Class="L" FareValue="145"/>
+            <Fares AdjustedFareValue="123" BidPrice="26" Class="M" FareValue="123"/>
+            <Fares AdjustedFareValue="67" BidPrice="26" Class="N" FareValue="67"/>
+            <Fares AdjustedFareValue="51" BidPrice="26" Class="O" FareValue="51"/>
+            <Fares AdjustedFareValue="60" BidPrice="26" Class="Q" FareValue="60"/>
+            <Fares AdjustedFareValue="77" BidPrice="26" Class="S" FareValue="77"/>
+            <Fares AdjustedFareValue="19" BidPrice="26" Class="T" FareValue="19"/>
+            <Fares AdjustedFareValue="111" BidPrice="26" Class="V" FareValue="111"/>
+            <Fares AdjustedFareValue="92" BidPrice="26" Class="X" FareValue="92"/>
+            <Fares AdjustedFareValue="242" BidPrice="26" Class="Y" FareValue="242"/>
+         </OnDInfo>
+         <RPIInfo NoOfSeats="1"/>
+      </AirInventoryRTDPDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- InventoryControlFlightDisplayRQ -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://www.sabre.com/ns/SSI/1.0">
+   <soapenv:Body>
+      <InventoryControlFlightDisplayRQ Version="4.3.1" TimeStamp="2016-02-02T12:17:58-06:00">
+         <FlightDisplay>
+            <ns:User id="">
+               <ns:POS/>
+               <ns:PCC/>
+               <ns:Carrier/>
+               <ns:City/>
+               <ns:Country/>
+               <ns:Type/>
+            </ns:User>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2127</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- InventoryControlFlightDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <InventoryControlFlightDisplayRS TimeStamp="2016-03-03T11:55:39" Version="4.3.1" xmlns="http://www.sabre.com/ns/SSI/1.0" xmlns:shdr="http://services.sabre.com/ns/SOTA/Messaging/v1">
+         <Header.RS>
+            <shdr:Results status="Complete">
+               <shdr:Success/>
+            </shdr:Results>
+         </Header.RS>
+         <FlightDisplay>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2127</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+            <Segment>
+               <Origin>LIM</Origin>
+               <Destination>AQP</Destination>
+               <Date>2016-03-04</Date>
+               <FltNum>2127</FltNum>
+               <NumLegs>1</NumLegs>
+               <MaxSeats/>
+               <MaxSeatsLoadFactor/>
+               <MinSeats/>
+               <MinSeatsLoadFactor/>
+               <Waitlist/>
+               <SeatsSold>
+                  <Seats class="A">68</Seats>
+                  <Seats class="B">5</Seats>
+                  <Seats class="G">5</Seats>
+                  <Seats class="L">1</Seats>
+                  <Seats class="N">1</Seats>
+                  <Seats class="T">4</Seats>
+                  <Seats class="Y">1</Seats>
+               </SeatsSold>
+               <WaitlistClosed/>
+               <TicketedCounts>
+                  <Seats class="A">68</Seats>
+                  <Seats class="B">2</Seats>
+                  <Seats class="G">5</Seats>
+                  <Seats class="L">1</Seats>
+                  <Seats class="N">1</Seats>
+                  <Seats class="T">4</Seats>
+                  <Seats class="Y">1</Seats>
+               </TicketedCounts>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <ArrivalTime>0615</ArrivalTime>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0445</DepartureTime>
+               <FareClassAvlSeq>YBHKMLVXSNQOGTAE</FareClassAvlSeq>
+            </Segment>
+            <Leg>
+               <Origin>LIM</Origin>
+               <Destination>AQP</Destination>
+               <Date>2016-03-04</Date>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0445</DepartureTime>
+               <ArrivalTime>0615</ArrivalTime>
+               <Configuration>A46</Configuration>
+               <NestingID>10</NestingID>
+               <Status>Open</Status>
+               <BlockClearance>false</BlockClearance>
+               <NestingOrder>
+                  <Cabin index="1">F</Cabin>
+                  <Cabin index="2">JCDIZUWPR</Cabin>
+                  <Cabin index="3">YBHKMLVXSNQOGTAE</Cabin>
+               </NestingOrder>
+               <Capacities>
+                  <Cabin index="1">0</Cabin>
+                  <Cabin index="2">0</Cabin>
+                  <Cabin index="3">174</Cabin>
+               </Capacities>
+               <SeatsSold>
+                  <Seats class="A">68</Seats>
+                  <Seats class="B">5</Seats>
+                  <Seats class="G">5</Seats>
+                  <Seats class="L">1</Seats>
+                  <Seats class="N">1</Seats>
+                  <Seats class="T">4</Seats>
+                  <Seats class="Y">1</Seats>
+               </SeatsSold>
+               <LegAuth>
+                  <Seats class="A">73</Seats>
+                  <Seats class="B">180</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">100</Seats>
+                  <Seats class="H">178</Seats>
+                  <Seats class="K">178</Seats>
+                  <Seats class="L">174</Seats>
+                  <Seats class="M">175</Seats>
+                  <Seats class="N">151</Seats>
+                  <Seats class="O">121</Seats>
+                  <Seats class="Q">137</Seats>
+                  <Seats class="S">162</Seats>
+                  <Seats class="T">73</Seats>
+                  <Seats class="V">171</Seats>
+                  <Seats class="X">170</Seats>
+                  <Seats class="Y">181</Seats>
+               </LegAuth>
+               <LegAvl>
+                  <Seats class="A">5</Seats>
+                  <Seats class="B">96</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">23</Seats>
+                  <Seats class="H">99</Seats>
+                  <Seats class="K">99</Seats>
+                  <Seats class="L">95</Seats>
+                  <Seats class="M">96</Seats>
+                  <Seats class="N">73</Seats>
+                  <Seats class="O">44</Seats>
+                  <Seats class="Q">60</Seats>
+                  <Seats class="S">84</Seats>
+                  <Seats class="T">1</Seats>
+                  <Seats class="V">93</Seats>
+                  <Seats class="X">92</Seats>
+                  <Seats class="Y">96</Seats>
+               </LegAvl>
+               <BlockSpace>0</BlockSpace>
+               <Marketing>false</Marketing>
+               <CabinBaseClasses>FJY</CabinBaseClasses>
+               <PartnerFlights>
+                  <PartnerFlight>
+                     <Carrier>AA</Carrier>
+                     <FltNum>7703</FltNum>
+                  </PartnerFlight>
+               </PartnerFlights>
+               <CommentIndex>0</CommentIndex>
+               <ServiceType>J</ServiceType>
+               <Operating>true</Operating>
+               <Shared>false</Shared>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <CabinSeatsSold>
+                  <Cabin index="3">85</Cabin>
+               </CabinSeatsSold>
+               <EquipmentID>320</EquipmentID>
+               <OperatingCarrier>LA</OperatingCarrier>
+               <OperatingFltNum>2127</OperatingFltNum>
+            </Leg>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- InventoryControlFlightDisplayRQ -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://www.sabre.com/ns/SSI/1.0">
+   <soapenv:Body>
+      <InventoryControlFlightDisplayRQ Version="4.3.1" TimeStamp="2016-02-02T12:17:58-06:00">
+         <FlightDisplay>
+            <ns:User id="">
+               <ns:POS/>
+               <ns:PCC/>
+               <ns:Carrier/>
+               <ns:City/>
+               <ns:Country/>
+               <ns:Type/>
+            </ns:User>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2094</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- InventoryControlFlightDisplayRS -->
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap-env:Body>
+      <InventoryControlFlightDisplayRS TimeStamp="2016-03-03T11:56:38" Version="4.3.1" xmlns="http://www.sabre.com/ns/SSI/1.0" xmlns:shdr="http://services.sabre.com/ns/SOTA/Messaging/v1">
+         <Header.RS>
+            <shdr:Results status="Complete">
+               <shdr:Success/>
+            </shdr:Results>
+         </Header.RS>
+         <FlightDisplay>
+            <Flight>
+               <Carrier>LA</Carrier>
+               <Number>2094</Number>
+               <Date>2016-03-04</Date>
+            </Flight>
+            <Segment>
+               <Origin>AQP</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <FltNum>2094</FltNum>
+               <NumLegs>1</NumLegs>
+               <MaxSeats/>
+               <MaxSeatsLoadFactor/>
+               <MinSeats/>
+               <MinSeatsLoadFactor/>
+               <Waitlist/>
+               <SeatsSold>
+                  <Seats class="A">16</Seats>
+                  <Seats class="L">2</Seats>
+                  <Seats class="O">1</Seats>
+                  <Seats class="Y">4</Seats>
+               </SeatsSold>
+               <WaitlistClosed/>
+               <TicketedCounts>
+                  <Seats class="A">16</Seats>
+                  <Seats class="L">2</Seats>
+                  <Seats class="O">1</Seats>
+               </TicketedCounts>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <ArrivalTime>0945</ArrivalTime>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0845</DepartureTime>
+               <FareClassAvlSeq>YBHKMLVXSNQOGTAE</FareClassAvlSeq>
+            </Segment>
+            <Leg>
+               <Origin>AQP</Origin>
+               <Destination>CUZ</Destination>
+               <Date>2016-03-04</Date>
+               <DepartureDateAdj>0</DepartureDateAdj>
+               <DepartureTime>0845</DepartureTime>
+               <ArrivalTime>0945</ArrivalTime>
+               <Configuration>A04</Configuration>
+               <NestingID>10</NestingID>
+               <Status>Open</Status>
+               <BlockClearance>false</BlockClearance>
+               <NestingOrder>
+                  <Cabin index="1">F</Cabin>
+                  <Cabin index="2">JCDIZUWPR</Cabin>
+                  <Cabin index="3">YBHKMLVXSNQOGTAE</Cabin>
+               </NestingOrder>
+               <Capacities>
+                  <Cabin index="1">0</Cabin>
+                  <Cabin index="2">0</Cabin>
+                  <Cabin index="3">144</Cabin>
+               </Capacities>
+               <SeatsSold>
+                  <Seats class="A">16</Seats>
+                  <Seats class="L">2</Seats>
+                  <Seats class="O">1</Seats>
+                  <Seats class="Y">4</Seats>
+               </SeatsSold>
+               <LegAuth>
+                  <Seats class="A">31</Seats>
+                  <Seats class="B">143</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">45</Seats>
+                  <Seats class="H">140</Seats>
+                  <Seats class="K">137</Seats>
+                  <Seats class="L">129</Seats>
+                  <Seats class="M">132</Seats>
+                  <Seats class="N">98</Seats>
+                  <Seats class="O">66</Seats>
+                  <Seats class="Q">82</Seats>
+                  <Seats class="S">112</Seats>
+                  <Seats class="T">31</Seats>
+                  <Seats class="V">119</Seats>
+                  <Seats class="X">112</Seats>
+                  <Seats class="Y">150</Seats>
+               </LegAuth>
+               <LegAvl>
+                  <Seats class="A">15</Seats>
+                  <Seats class="B">124</Seats>
+                  <Seats class="E">0</Seats>
+                  <Seats class="G">29</Seats>
+                  <Seats class="H">121</Seats>
+                  <Seats class="K">118</Seats>
+                  <Seats class="L">110</Seats>
+                  <Seats class="M">113</Seats>
+                  <Seats class="N">81</Seats>
+                  <Seats class="O">49</Seats>
+                  <Seats class="Q">65</Seats>
+                  <Seats class="S">95</Seats>
+                  <Seats class="T">15</Seats>
+                  <Seats class="V">102</Seats>
+                  <Seats class="X">95</Seats>
+                  <Seats class="Y">127</Seats>
+               </LegAvl>
+               <BlockSpace>0</BlockSpace>
+               <Marketing>false</Marketing>
+               <CabinBaseClasses>FJY</CabinBaseClasses>
+               <CommentIndex>0</CommentIndex>
+               <ServiceType>J</ServiceType>
+               <Operating>true</Operating>
+               <Shared>false</Shared>
+               <ArrivalDateAdjustment>0</ArrivalDateAdjustment>
+               <CabinSeatsSold>
+                  <Cabin index="3">23</Cabin>
+               </CabinSeatsSold>
+               <EquipmentID>319</EquipmentID>
+               <OperatingCarrier>LA</OperatingCarrier>
+               <OperatingFltNum>2094</OperatingFltNum>
+            </Leg>
+         </FlightDisplay>
+      </InventoryControlFlightDisplayRS>
+   </soap-env:Body>
+</soap-env:Envelope>
+
+<!-- RPH 4 [Page 1] FilterOut -->
+
+<!-- Step #5 [Construct the reply to GSO] -->
+<Response>
+    <Direction id="1">
+        <Option EFT="0110" id="1">
+            <Flight EFT="0110" aircraftType="319" arrivalDate="20160304" arrivalTime="0505" carrier="LA" departureDate="20160304" departureTime="0355" destination="CUZ" flightNumber="2003" origin="LIM" sequenceNumber="1">
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="CUZ" sequenceNumber="1">
+                    <Compartment adjustedCapacity="144" capacity="144" code="Y" groupBooked="0" odFactor="100" totalAU="151" totalBooked="56">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="7"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="8"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="37"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="CUZ" origin="LIM" sequenceNumber="1">
+                    <Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="95" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="90" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="90" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="90" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="83" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="999" odAvailability="81" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="71" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="64" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="58" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="42" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="30" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="22" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="19" totalBooked="7"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="15" totalBooked="8"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="15" totalBooked="37"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+                </Segment>
+            </Flight>
+		</Option>
+        <Option EFT="0120" id="2">
+            <Flight EFT="0120" aircraftType="320" arrivalDate="20160304" arrivalTime="0610" carrier="LA" departureDate="20160304" departureTime="0450" destination="CUZ" flightNumber="2025" origin="LIM" sequenceNumber="1">
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="CUZ" sequenceNumber="1">
+                    <Compartment adjustedCapacity="174" capacity="174" code="Y" groupBooked="0" odFactor="100" totalAU="183" totalBooked="20">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="3"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="10"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="4"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="CUZ" origin="LIM" sequenceNumber="1">
+                    <Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="163" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="160" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="153" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="153" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="153" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="4" odAvailability="1" totalBooked="3"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="142" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="134" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="127" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="97" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="84" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="75" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="72" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="59" totalBooked="10"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="59" totalBooked="4"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+                </Segment>
+            </Flight>
+		</Option>
+        <Option EFT="0230" id="3">
+            <Flight EFT="0130" aircraftType="320" arrivalDate="20160304" arrivalTime="0615" carrier="LA" departureDate="20160304" departureTime="0445" destination="AQP" flightNumber="2127" origin="LIM" sequenceNumber="1">
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="AQP" sequenceNumber="1">
+                    <Compartment adjustedCapacity="174" capacity="174" code="Y" groupBooked="0" odFactor="100" totalAU="181" totalBooked="85">
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="4"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="68"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="AQP" origin="LIM" sequenceNumber="1">
+                    <Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="96" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="96" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="96" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="96" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="96" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="999" odAvailability="95" totalBooked="1"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="93" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="92" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="84" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="73" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="60" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="44" totalBooked="0"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="23" totalBooked="5"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="1" totalBooked="4"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="1" totalBooked="68"/>
+						<Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>	
+                    </Compartment>
+                </Segment>
+            </Flight>
+			<Flight EFT="0100" aircraftType="319" arrivalDate="20160304" arrivalTime="0945" carrier="LA" departureDate="20160304" departureTime="0845" destination="CUZ" flightNumber="2094" origin="AQP" sequenceNumber="1">
+                <Leg allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" dateOffset="0" destination="CUZ" sequenceNumber="1">
+                    <Compartment adjustedCapacity="144" capacity="144" code="Y" groupBooked="0" odFactor="100" totalAU="150" totalBooked="23">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" totalBooked="4"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" totalBooked="16"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" totalBooked="0"/>
+                    </Compartment>
+                </Leg>
+                <Segment allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" destination="CUZ" origin="AQP" sequenceNumber="1">
+                    <Compartment code="Y" groupBooked="0">
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Y" groupBooked="0" limit="999" odAvailability="127" totalBooked="4"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="B" groupBooked="0" limit="999" odAvailability="124" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="H" groupBooked="0" limit="999" odAvailability="121" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="K" groupBooked="0" limit="999" odAvailability="118" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="M" groupBooked="0" limit="999" odAvailability="113" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="L" groupBooked="0" limit="999" odAvailability="110" totalBooked="2"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="V" groupBooked="0" limit="999" odAvailability="102" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="X" groupBooked="0" limit="999" odAvailability="95" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="S" groupBooked="0" limit="999" odAvailability="95" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="N" groupBooked="0" limit="999" odAvailability="81" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="Q" groupBooked="0" limit="999" odAvailability="65" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="O" groupBooked="0" limit="999" odAvailability="49" totalBooked="1"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="G" groupBooked="0" limit="999" odAvailability="29" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="T" groupBooked="0" limit="999" odAvailability="15" totalBooked="0"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="A" groupBooked="0" limit="999" odAvailability="15" totalBooked="16"/>
+                        <Class allowBooking="1" allowGroup="1" allowSale="1" allowWaitList="1" code="E" groupBooked="0" limit="999" odAvailability="0" totalBooked="0"/>    
+                    </Compartment>
+                </Segment>
+            </Flight>
+		</Option>
+		<!-- Option id="4" Is not a LATAM flight -->
+	</Direction>
+</Response>

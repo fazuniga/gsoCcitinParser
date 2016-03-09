@@ -20,7 +20,7 @@ public class CcitinRSDirection_OptionFlight {
     private String Origin, Destination;
     
     private List<CcitinRSDirection_OptionFlight_Leg> Legs;
-    private List<CcitinRSDirection_OptionFlight_Segment> Segments;
+    private List<CcitinRSDirection_OptionFlight_Seg> Segments;
 
     public CcitinRSDirection_OptionFlight() {
     }
@@ -121,11 +121,11 @@ public class CcitinRSDirection_OptionFlight {
         this.Legs = Legs;
     }
 
-    public List<CcitinRSDirection_OptionFlight_Segment> getSegments() {
+    public List<CcitinRSDirection_OptionFlight_Seg> getSegments() {
         return Segments;
     }
 
-    public void setSegments(List<CcitinRSDirection_OptionFlight_Segment> Segments) {
+    public void setSegments(List<CcitinRSDirection_OptionFlight_Seg> Segments) {
         this.Segments = Segments;
     }
 }

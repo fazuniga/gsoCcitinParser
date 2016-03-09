@@ -1,0 +1,65 @@
+<!-- 
+CASE 01
+No options available, no flight schedule 
+-->
+
+<!-- Step #1 GSO to CCITIN-->
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+	<ns0:getCcitinOption xmlns:ns0="http://webservice.reservation.group.airline.prosrm.com/xsd">
+		<ns0:ccitinRequest><?xml version="1.0" encoding="UTF-8"?>
+			<Request version="1.0.0" airlineVendorID="LA">
+			  <Direction id="1" origin="LAP" destination="SJD" cityPOS="SCL" countryPOS="CL" directFlightsOnly="no" allowOAL="no">
+				<DepartureDate startDate="20161201" endDate="20161201" frequency="1111111" startTime="0000" endTime="2359" orientation="D"/>
+			  </Direction>
+			</Request>
+		</ns0:ccitinRequest>
+	</ns0:getCcitinOption>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+<!-- Step #2 Get Itinary options -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2011/10">
+   <soapenv:Body>
+      <ns:OTA_AirAvailRQ ReturnHostCommand="true" Version="2.1.0">
+      	<ns:OptionalQualifiers>
+			<!-- <ns:AdditionalAvailability Ind="true" /> -->
+         	<ns:FlightQualifiers Charters="false" DirectOnly="false" ExcludeCodeshares="true" Scan="false" />
+         	<ns:TimeQualifiers>
+				<ns:DepartureTime WindowBefore="23:59" WindowAfter="00:00"/>
+            </ns:TimeQualifiers>
+      	</ns:OptionalQualifiers>
+        <ns:OriginDestinationInformation>
+			<ns:FlightSegment DepartureDateTime="2016-12-01">
+				<ns:DestinationLocation LocationCode="SDJ"/>
+				<ns:OriginLocation LocationCode="LAP"/>
+			</ns:FlightSegment>
+		</ns:OriginDestinationInformation>
+      </ns:OTA_AirAvailRQ>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!-- Step #3 Itinary options reply from SABRE -->
+<ns2:OTA_AirAvailRS xmlns="http://services.sabre.com/STL/v01" xmlns:ns2="http://webservices.sabre.com/sabreXML/2011/10" Version="2.1.0">
+	<ApplicationResults status="Complete">
+		<Success timeStamp="2016-01-20T14:30:35-06:00"/>
+		<Warning type="BusinessLogic">
+			<SystemSpecificResults>
+				<Message>NONE SKED</Message>
+				<ShortText>WARN.SWS.HOST.WARNING_RESPONSE</ShortText>
+			</SystemSpecificResults>
+		</Warning>
+	</ApplicationResults>
+	<ns2:OriginDestinationOptions OriginTimeZone="MST" DestinationTimeZone="MST"/>
+</ns2:OTA_AirAvailRS>
+
+<!-- Step #4 -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Body>
+      <ns1:getCcitinOptionResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://webservice.reservation.group.airline.prosrm.com/xsd">
+         <getCcitinOptionReturn xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"><![CDATA[<?xml version="1.0"?><Response><Error><code>1001</code><message>No scheduled flights for (LAP-SJD) date (2016-12-01)</message></Error></Response>]]></getCcitinOptionReturn>
+      </ns1:getCcitinOptionResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+

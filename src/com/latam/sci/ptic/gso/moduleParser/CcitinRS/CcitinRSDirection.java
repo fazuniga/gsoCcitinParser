@@ -13,9 +13,18 @@ import java.util.List;
  */
 public class CcitinRSDirection {
     
+    private int DirectionID;
     private List<CcitinRSDirection_Option> Options;
 
     public CcitinRSDirection() {
+    }
+
+    public int getDirectionID() {
+        return DirectionID;
+    }
+
+    public void setDirectionID(int DirectionID) {
+        this.DirectionID = DirectionID;
     }
 
     public List<CcitinRSDirection_Option> getOptions() {

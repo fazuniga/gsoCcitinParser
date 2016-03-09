@@ -11,14 +11,14 @@ import java.util.List;
  *
  * @author 641515
  */
-public class CcitinRSDirection_OptionFlight_Leg {
+public class CcitinRSDirection_OptionFlight_Seg {
     private int allowBooking, allowGroup, allowSale, allowWaitlist;
-    private int dateOffset, LegSequenceNumber;
-    private String LegDstn;
+    private int SegSequenceNumber;
+    private String SegOrgn, SegDstn;
     
-    private List<CcitinRSDirection_OptionFlight_Leg_Cmp> Compartments;
+    private List<CcitinRSDirection_OptionFlight_Seg_Cmp> Compartments;
 
-    public CcitinRSDirection_OptionFlight_Leg() {
+    public CcitinRSDirection_OptionFlight_Seg() {
     }
 
     public int getAllowBooking() {
@@ -53,35 +53,35 @@ public class CcitinRSDirection_OptionFlight_Leg {
         this.allowWaitlist = allowWaitlist;
     }
 
-    public int getDateOffset() {
-        return dateOffset;
+    public int getSegSequenceNumber() {
+        return SegSequenceNumber;
     }
 
-    public void setDateOffset(int dateOffset) {
-        this.dateOffset = dateOffset;
+    public void setSegSequenceNumber(int SegSequenceNumber) {
+        this.SegSequenceNumber = SegSequenceNumber;
     }
 
-    public int getLegSequenceNumber() {
-        return LegSequenceNumber;
+    public String getSegOrgn() {
+        return SegOrgn;
     }
 
-    public void setLegSequenceNumber(int LegSequenceNumber) {
-        this.LegSequenceNumber = LegSequenceNumber;
+    public void setSegOrgn(String SegOrgn) {
+        this.SegOrgn = SegOrgn;
     }
 
-    public String getLegDstn() {
-        return LegDstn;
+    public String getSegDstn() {
+        return SegDstn;
     }
 
-    public void setLegDstn(String LegDstn) {
-        this.LegDstn = LegDstn;
+    public void setSegDstn(String SegDstn) {
+        this.SegDstn = SegDstn;
     }
 
-    public List<CcitinRSDirection_OptionFlight_Leg_Cmp> getCompartments() {
+    public List<CcitinRSDirection_OptionFlight_Seg_Cmp> getCompartments() {
         return Compartments;
     }
 
-    public void setCompartments(List<CcitinRSDirection_OptionFlight_Leg_Cmp> Compartments) {
+    public void setCompartments(List<CcitinRSDirection_OptionFlight_Seg_Cmp> Compartments) {
         this.Compartments = Compartments;
     }
 }
