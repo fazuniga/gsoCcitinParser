@@ -11,17 +11,18 @@ import java.util.List;
  *
  * @author 641515
  */
-public class CcitinRS {
+public class CcitinRSDirection {
     
-    private List<CcitinRSDirection> Directions;
-    
-    public CcitinRS() { }
+    private List<CcitinRSDirection_Option> Options;
 
-    public List<CcitinRSDirection> getDirections() {
-        return Directions;
+    public CcitinRSDirection() {
     }
 
-    public void setDirections(List<CcitinRSDirection> Directions) {
-        this.Directions = Directions;
+    public List<CcitinRSDirection_Option> getOptions() {
+        return Options;
+    }
+
+    public void setOptions(List<CcitinRSDirection_Option> Options) {
+        this.Options = Options;
     }
 }
