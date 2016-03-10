@@ -320,6 +320,12 @@ public class RTDPAvailabilityRSParser {
             
             for (String line : OnDInfo) 
             {
+                m = CcitinGSORegEx.RegExTest("\\s*<OnDInfo Destination=\"AKL\" Origin=\"SCL\">.*$", line);
+                if (m.find())
+                {
+                    String ol = "hola";
+                }
+                
                 m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
                 if (m.find())
                 {

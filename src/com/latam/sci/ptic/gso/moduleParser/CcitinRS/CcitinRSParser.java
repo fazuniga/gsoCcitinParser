@@ -23,7 +23,6 @@ public class CcitinRSParser {
     public CcitinRS CcitinRSProcessLines(List<String> CcitinRSLines)
     {
         CcitinRS ccitinRS = null;
-        // List<RTDPAvailabilityRS_Segment> rtdpRSSegments = null;
         
         System.out.println("##### CcitinRS PARSING #####");
         Matcher m;
@@ -39,20 +38,7 @@ public class CcitinRSParser {
             
             List<CcitinRSDirection_OptionFlight> flights = null;
             CcitinRSDirection_OptionFlight flight = null;
-            
-            List<CcitinRSDirection_OptionFlight_Leg> legs = null;
-            CcitinRSDirection_OptionFlight_Leg leg = null;
-            
-            List<CcitinRSDirection_OptionFlight_Leg_Cmp> legcmps = null;
-            CcitinRSDirection_OptionFlight_Leg_Cmp legcmp = null;
-            
-            List<CcitinRSDirection_OptionFlight_Seg> segs = null;
-            CcitinRSDirection_OptionFlight_Seg seg = null;
-            
-            List<CcitinRSDirection_OptionFlight_Seg_Cmp> segcmps = null;
-            CcitinRSDirection_OptionFlight_Seg_Cmp segcmp = null;
-            
-            
+     
             List<List<String>> Directions = CcitinGSORegEx.IsolateSection(
                     CcitinRSLines, 
                     CcitinGSORegEx.CcitinRS_Direction_start, 
@@ -75,8 +61,6 @@ public class CcitinRSParser {
                             
                             direction = new CcitinRSDirection();
                             direction.setDirectionID(DirectionID);
-                            
-                            // ccitinRS.getDirections().add(direction);
                         }
                     }
                     
@@ -103,8 +87,6 @@ public class CcitinRSParser {
                                     option = new CcitinRSDirection_Option();
                                     option.setEFT(EFT);
                                     option.setOptionID(OptionID);
-
-                                    // direction.getOptions().add(option);
                                 }
                             }
                             
@@ -114,12 +96,11 @@ public class CcitinRSParser {
                                 CcitinGSORegEx.CcitinRS_Direction_OptionFlight_end);
                             
                             flights = ProcessFlights(Flights);
-                            
-                            option.setFlights(flights);
+                            if (flights != null) { option.setFlights(flights); }
                             options.add(option);
                         }
                     }
-                    direction.setOptions(options);
+                    if (options != null) { direction.setOptions(options); }
                     directions.add(direction);
                 }
                 ccitinRS.setDirections(directions);
