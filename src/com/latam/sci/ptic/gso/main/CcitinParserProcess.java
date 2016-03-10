@@ -6,8 +6,13 @@
 package com.latam.sci.ptic.gso.main;
 
 import com.latam.sci.ptic.gso.auxiliar.Constants;
+import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
+import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRSDirection_OptionFlight_Seg_Cmp_Class;
+import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS;
+import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS_OnDInfo;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /*
@@ -55,6 +60,50 @@ public class CcitinParserProcess {
         for (CcitinParserResponse cpr : cprList)
         {
             cpr.ccitinRQ.printCcitinRQ();
+            
+            for (RTDPAvailabilityRS rtdpRS : cpr.rtdpAvailabilityRS)
+            {
+                for (RTDPAvailabilityRS_OnDInfo OnDInfo : rtdpRS.getOnDInfos())
+                {
+                    System.out.println("## O&D: " + OnDInfo.getOrigin() + " / " + OnDInfo.getDestination());
+                    
+                    Boolean RTDPControlled = false;
+                    for (Integer SegIndex : OnDInfo.getSegIndex())
+                    {
+                        String segRTDPActive = rtdpRS.getSegments().get(SegIndex - 1).getRTDPActive();
+                        Boolean RTDPActive = (segRTDPActive == "true") ? true : false;
+                        RTDPControlled = RTDPControlled && RTDPActive;
+                    }
+                    
+                    System.out.println("## Disponibilidad: " + ((RTDPControlled) ? "BP" : "AU"));
+                    
+                    // Choose the right availability
+                    List<List<SeatsClass>> Availability = new ArrayList<>();
+                    for (Integer SegIndex : OnDInfo.getSegIndex())
+                    {
+                        if (RTDPControlled) {
+                            Availability.add(rtdpRS.getSegments().get(SegIndex - 1).getRTDPAvail());
+                        } else {
+                            Availability.add(rtdpRS.getSegments().get(SegIndex - 1).getSeatsAvail());
+                        }
+                    }
+                    
+                    List<CcitinRSDirection_OptionFlight_Seg_Cmp_Class> Classes = cpr.ccitinRS
+                        .getDirections().get(0)
+                        .getOptions().get(0)
+                        .getFlights().get(0)
+                        .getSegments().get(0)
+                        .getCompartments().get(0)
+                        .getClasses();
+                    
+                    for (CcitinRSDirection_OptionFlight_Seg_Cmp_Class Class : Classes)
+                    {
+                        System.out.println("Clase: " + Class.getClsCode() + " - Availability: " + Class.getOdAvailability());
+                    }
+                    
+                    String a = "0";
+                }
+            }
         }
     }
 }

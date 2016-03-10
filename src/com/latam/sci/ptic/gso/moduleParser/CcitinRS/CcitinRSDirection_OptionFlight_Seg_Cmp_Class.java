@@ -9,7 +9,7 @@ package com.latam.sci.ptic.gso.moduleParser.CcitinRS;
  *
  * @author 641515
  */
-class CcitinRSDirection_OptionFlight_Seg_Cmp_Class {
+public class CcitinRSDirection_OptionFlight_Seg_Cmp_Class {
     private String ClsCode;
     private int allowBooking, allowGroup, allowSale, allowWaitList, groupBooked, totalBooked;
     private int limit, odAvailability;
