@@ -54,6 +54,15 @@ public final class CcitinGSORegEx {
     
     public static String OTA_AirAvailRS_start = "^.*<[A-Za-z0-9:]*OTA_AirAvailRS.*$";
     public static String OTA_AirAvailRS_end = "^.*</[A-Za-z0-9:]*OTA_AirAvailRS.*$";
+    public static String OTA_AirAvailRS_OriginDestinationOption_start = "^\\s*<OriginDestinationOption RPH=\"(?<OriginDestinationRPH>\\d+)\".*$";
+    public static String OTA_AirAvailRS_OriginDestinationOption_end = "^\\s*</OriginDestinationOption>.*$";
+    public static String OTA_AirAvailRS_FlightSegment_start = "^\\s*<FlightSegment ArrivalDateTime=\"(?<ArrivalDateTime>[0-9:T-]{11})\"[ ]*(ConnectionInd=\"(?<ConnectionInd>[Y|N]*?)\")?[ ]*(DOT_Ind=\"(?<DOTInd>[Y|N]*?)\")? DepartureDateTime=\"(?<DepartureDateTime>[0-9:T-]{11})\" FlightNumber=\"(?<FlightNumber>\\d+)\" RPH=\"(?<FlightRPH>\\d+)\".*$";
+    public static String OTA_AirAvailRS_FlightSegment_end = "^\\s*</FlightSegment>";
+    
+    public static String OTA_AirAvailRS_FlightSegment_Origin = "^\\s*<OriginLocation LocationCode=\"(?<OriginLocation>[A-Z]{3})\".*$";
+    public static String OTA_AirAvailRS_FlightSegment_Destination = "^\\s*<DestinationLocation LocationCode=\"(?<DestinationLocation>[A-Z]{3})\".*$";
+    public static String OTA_AirAvailRS_FlightSegment_MarketingAirline = "^\\s*<MarketingAirline Code=\"(?<MarketingAirlineCode>[A-Z0-9]{2})\" FlightNumber=\"(?<MarketingFlightNumber>\\d+).*$";
+
     
     // Inventory - REQUEST
     public static String InventoryRQ_start = "^*<[A-Za-z0-9:]*InventoryControlFlightDisplayRQ.*$";

@@ -9,13 +9,7 @@ package com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS;
  *
  * @author 641515
  */
-public class OTA_AirAvailRSFlightSegment {
-    public static String OTA_AirAvailRSFlightSegment_start = "^\\s*<FlightSegment ArrivalDateTime=\"(?<ArrivalDateTime>[0-9:T-]{11})\"[ ]*(ConnectionInd=\"(?<ConnectionInd>[Y|N]*?)\")?[ ]*(DOT_Ind=\"(?<DOTInd>[Y|N]*?)\")? DepartureDateTime=\"(?<DepartureDateTime>[0-9:T-]{11})\" FlightNumber=\"(?<FlightNumber>\\d+)\" RPH=\"(?<FlightRPH>\\d+)\".*$";
-    public static String OTA_AirAvailRSFlightSegment_end = "^\\s*</FlightSegment>";
-    
-    public static String OTA_AirAvailRSFlightSegment_Origin = "^\\s*<OriginLocation LocationCode=\"(?<OriginLocation>[A-Z]{3})\".*$";
-    public static String OTA_AirAvailRSFlightSegment_Destination = "^\\s*<DestinationLocation LocationCode=\"(?<DestinationLocation>[A-Z]{3})\".*$";
-    public static String OTA_AirAvailRSFlightSegment_MarketingAirline = "^\\s*<MarketingAirline Code=\"(?<MarketingAirlineCode>[A-Z0-9]{2})\" FlightNumber=\"(?<MarketingFlightNumber>\\d+).*$";
+public class OTA_AirAvailRS_FlightSegment {
 
     private String DepartureDate, DepartureTime;
     private String ArrivalDate, ArrivalTime;
@@ -25,7 +19,7 @@ public class OTA_AirAvailRSFlightSegment {
     private String OriginLocation, DestinationLocation;
     private String MarketingAirlineCode, MarketingFlightNumber;
     
-    public OTA_AirAvailRSFlightSegment() {}    
+    public OTA_AirAvailRS_FlightSegment() {}    
     
     public String getDepartureDate() {
         return DepartureDate;

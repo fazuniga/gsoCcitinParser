@@ -11,23 +11,19 @@ import java.util.List;
  *
  * @author 641515
  */
-public class OTA_AirAvailRSElement {
+public class OTA_AirAvailRS_OriginDestinationOption {
     
-    public static String OTA_AirAvailRS_OriginDestinationOption_start = "^\\s*<OriginDestinationOption RPH=\"(?<OriginDestinationRPH>\\d+)\".*$";
-    public static String OTA_AirAvailRS_OriginDestinationOption_end = "^\\s*</OriginDestinationOption>.*$";
-    
-    private List<OTA_AirAvailRS_FlightSegment> OTA_AirAvailRSFlightSegments;
+    private List<OTA_AirAvailRS_FlightSegment> FlightSegments;
     private String OriginDestinationRPH;
-    
-    public OTA_AirAvailRSElement() {}
-    
-    
+
+    public OTA_AirAvailRS_OriginDestinationOption() { }
+
     public List<OTA_AirAvailRS_FlightSegment> getOTA_AirAvailRSFlightSegments() {
-        return OTA_AirAvailRSFlightSegments;
+        return FlightSegments;
     }
 
-    public void setOTA_AirAvailRSFlightSegments(List<OTA_AirAvailRS_FlightSegment> OTA_AirAvailRSFlightSegments) {
-        this.OTA_AirAvailRSFlightSegments = OTA_AirAvailRSFlightSegments;
+    public void setOTA_AirAvailRSFlightSegments(List<OTA_AirAvailRS_FlightSegment> FlightSegments) {
+        this.FlightSegments = FlightSegments;
     }
 
     public String getOriginDestinationRPH() {

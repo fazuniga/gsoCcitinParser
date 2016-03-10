@@ -12,15 +12,16 @@ import java.util.List;
  * @author 641515
  */
 public class OTA_AirAvailRS {
-    private List<OTA_AirAvailRSElement> ota_AirAvailRS = null;
     
-    public List<OTA_AirAvailRSElement> getOta_AirAvailRS() {
-        return ota_AirAvailRS;
-    }
-
-    public void setOta_AirAvailRS(List<OTA_AirAvailRSElement> ota_AirAvailRS) {
-        this.ota_AirAvailRS = ota_AirAvailRS;
-    }
+    private List<OTA_AirAvailRS_OriginDestinationOption> Options;
         
     public OTA_AirAvailRS() {}
+
+    public List<OTA_AirAvailRS_OriginDestinationOption> getOptions() {
+        return Options;
+    }
+
+    public void setOptions(List<OTA_AirAvailRS_OriginDestinationOption> Options) {
+        this.Options = Options;
+    }
 }
