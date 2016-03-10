@@ -30,16 +30,31 @@ public class CcitinParserProcess {
         //  - getFileFormat defines the extension of the files
         //  - getInputFilesFolder determines the input folder
         files = Constants.getInputFiles(Constants.getInputFilesFolder(), Constants.getFileFormat());
-         
+        
+        System.out.println("---------------------");
+        System.out.println("#### Input Files ####");
+        System.out.println("---------------------");
+        
         for (File file : files)
         {
             System.out.println("##\tProcesando:\t" + file.getName());
             
             CcitinParserResponse cpr = processTestFile.processFile(file);
-            if (cpr != null) {
-                cprList.add(cpr);
-            }
+            if (cpr != null) { cprList.add(cpr); }
         }
-        String x = "0";
+        
+        validateResponses(cprList);
+    }
+    
+    public void validateResponses(List<CcitinParserResponse> cprList) {
+        
+        System.out.println("--------------------");
+        System.out.println("#### Validation ####");
+        System.out.println("--------------------");
+        
+        for (CcitinParserResponse cpr : cprList)
+        {
+            cpr.ccitinRQ.printCcitinRQ();
+        }
     }
 }

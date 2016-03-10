@@ -23,9 +23,9 @@ public class RTDPAvailabilityRSParser {
     {
         RTDPAvailabilityRS rtdpRS = null;
         List<RTDPAvailabilityRS_Segment> rtdpRSSegments = null;
-        
-        System.out.println("##### RTDPAvailabilityRS PARSING #####");
         Matcher m;
+        
+        // System.out.println("##### RTDPAvailabilityRS PARSING #####");
         
         if (RTDPAvailabilityRSLines != null)
         {

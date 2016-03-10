@@ -21,7 +21,7 @@ public class OTA_AirAvailRQParser {
     {
         OTA_AirAvailRQ otaRQ = null;
         
-        System.out.println("##### OTA AIR AVAIL RQ PARSING #####");
+        // System.out.println("##### OTA AIR AVAIL RQ PARSING #####");
         Matcher m;
         
         if (OTA_AirAvailRQLines != null)

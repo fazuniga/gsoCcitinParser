@@ -37,7 +37,7 @@ public class InventoryRSParser {
                 CcitinGSORegEx.InventoryRS_FlightLeg_start, 
                 CcitinGSORegEx.InventoryRS_FlightLeg_end);
         
-        System.out.println("##### InventoryRS PARSING #####");
+        // System.out.println("##### InventoryRS PARSING #####");
         Matcher m;
         
         // Flight

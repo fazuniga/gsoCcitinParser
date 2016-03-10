@@ -24,7 +24,7 @@ public class CcitinRSParser {
     {
         CcitinRS ccitinRS = null;
         
-        System.out.println("##### CCITIN RS PARSING #####");
+        // System.out.println("##### CCITIN RS PARSING #####");
         Matcher m;
         
         if (CcitinRSLines != null)

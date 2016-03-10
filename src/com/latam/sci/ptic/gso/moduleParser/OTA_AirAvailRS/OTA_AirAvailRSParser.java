@@ -33,7 +33,7 @@ public class OTA_AirAvailRSParser {
         List<OTA_AirAvailRSFlightSegment> otaRSe_FlightSegments  = null;
         OTA_AirAvailRSFlightSegment otaRSe_FlightSegment = null;
         
-        System.out.println("##### OTA AIR AVAIL RS PARSING #####");
+        // System.out.println("##### OTA AIR AVAIL RS PARSING #####");
         Matcher m;
         
         for (String line : OTA_AirAvailRSLines)

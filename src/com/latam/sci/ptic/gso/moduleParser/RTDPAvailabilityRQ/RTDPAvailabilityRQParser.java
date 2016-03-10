@@ -20,14 +20,11 @@ public class RTDPAvailabilityRQParser {
     public RTDPAvailabilityRQ RTDPAvailabilityRQProcessLines(List<String> RTDPAvailabilityRQLines)
     {
         RTDPAvailabilityRQ rtdpRQ = null;
-        
-        // List<RTDPAvailabilityRQElement> rtdpRQElements = new ArrayList<>();
-        // RTDPAvailabilityRQElement rtdpRQe = new RTDPAvailabilityRQElement();
-        
         List<RTDPAvailabilityRQ_Segment> rtdpRQSegments = null;
-        
-        System.out.println("##### RTDPAvailabilityRQ PARSING #####");
         Matcher m;
+        
+        // System.out.println("##### RTDPAvailabilityRQ PARSING #####");
+        
         if (RTDPAvailabilityRQLines != null)
         {
             rtdpRQ = new RTDPAvailabilityRQ();

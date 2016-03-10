@@ -19,7 +19,7 @@ public class InventoryRQParser {
     {
         InventoryRQ invRQ = null;
         
-        System.out.println("##### InventoryRQ PARSING #####");
+        // System.out.println("##### InventoryRQ PARSING #####");
         Matcher m;
         
         if (InventoryRQProcessLines != null)

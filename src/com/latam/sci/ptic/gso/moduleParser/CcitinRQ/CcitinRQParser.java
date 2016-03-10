@@ -22,7 +22,7 @@ public class CcitinRQParser {
     {
         CcitinRQ cRQ = null;
         
-        System.out.println("##### CCITIN RQ PARSING #####");
+        // System.out.println("##### CCITIN RQ PARSING #####");
         Matcher m;
         
         if (CcitinRQLines != null) 

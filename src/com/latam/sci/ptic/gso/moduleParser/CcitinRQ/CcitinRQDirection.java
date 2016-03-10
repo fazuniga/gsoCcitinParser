@@ -136,4 +136,22 @@ public class CcitinRQDirection {
             return false;
         }
     }
+    
+    public void printCcitinRQDirection()
+    {
+        System.out.println("# Dirección: " + this.getDirectionID());
+        System.out.println("## Origen  : " + this.getOrigin());
+        System.out.println("## Destino : " + this.getDestination());
+        System.out.println("## POS     : " + this.getCountryPOS() + " [" + this.getCityPOS() + "]");
+
+        System.out.println();
+        System.out.println("# Fechas");
+        System.out.println("## Start   : " + this.getStartDate());
+        System.out.println("## End     : " + this.getEndDate());
+
+        System.out.println();
+        System.out.println("# Parámetros");
+        System.out.println("## Direct Flights : " + this.getDirectFlights());
+        System.out.println("## OAL            : " + this.getAllowOAL());
+    }
 }

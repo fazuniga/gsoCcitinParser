@@ -24,4 +24,12 @@ public class CcitinRQ {
     public void setDirections(List<CcitinRQDirection> Directions) {
         this.Directions = Directions;
     }
+    
+    public void printCcitinRQ()
+    {
+        for (CcitinRQDirection direction : this.Directions)
+        {
+            direction.printCcitinRQDirection();
+        }
+    }
 }
