@@ -24,7 +24,7 @@ public class CcitinRSParser {
     {
         CcitinRS ccitinRS = null;
         
-        System.out.println("##### CcitinRS PARSING #####");
+        System.out.println("##### CCITIN RS PARSING #####");
         Matcher m;
         
         if (CcitinRSLines != null)
@@ -37,7 +37,6 @@ public class CcitinRSParser {
             CcitinRSDirection_Option option = null;
             
             List<CcitinRSDirection_OptionFlight> flights = null;
-            CcitinRSDirection_OptionFlight flight = null;
      
             List<List<String>> Directions = CcitinGSORegEx.IsolateSection(
                     CcitinRSLines, 
