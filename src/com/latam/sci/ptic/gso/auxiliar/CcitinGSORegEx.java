@@ -180,32 +180,36 @@ public final class CcitinGSORegEx {
         List<String> sectionLines = null;
         Matcher m;
         
-        for (String line : lines)
+        if (lines != null)
         {
-            if (finalLines == null) { finalLines = new ArrayList<>(); }
-            
-            m = CcitinGSORegEx.RegExTest(startRegExStr, line);
-            if (m.find()) { sectionLines = new ArrayList<>(); }
-            
-            m = CcitinGSORegEx.RegExTest(endRegExStr, line);
-            if (m.find())
+            for (String line : lines)
             {
-                if (trim) {
-                    sectionLines.add(line.trim());
+                if (finalLines == null) { finalLines = new ArrayList<>(); }
+
+                m = CcitinGSORegEx.RegExTest(startRegExStr, line);
+                if (m.find()) { sectionLines = new ArrayList<>(); }
+
+                m = CcitinGSORegEx.RegExTest(endRegExStr, line);
+                if (m.find())
+                {
+                    if (sectionLines != null) {
+                        if (trim) { sectionLines.add(line.trim()); }
+                        else { sectionLines.add(line); }
+
+                        finalLines.add(sectionLines);
+                        sectionLines = null;
+                    }
                 }
-                else {
-                    sectionLines.add(line);
+
+                if (sectionLines != null) {
+                    if (trim) { sectionLines.add(line.trim()); }
+                    else { sectionLines.add(line); }
                 }
-                
-                finalLines.add(sectionLines);
-                sectionLines = null;
             }
-            
-            if (sectionLines != null) { sectionLines.add(line); }
-        }
-        
-        if (finalLines != null) {
-            if (finalLines.isEmpty()) { finalLines = null; }
+
+            if (finalLines != null) {
+                if (finalLines.isEmpty()) { finalLines = null; }
+            }
         }
         
         return finalLines;

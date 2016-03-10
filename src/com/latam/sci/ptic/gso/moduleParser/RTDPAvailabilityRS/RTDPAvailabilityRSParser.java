@@ -7,6 +7,7 @@ package com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS;
 
 import com.latam.sci.ptic.gso.auxiliar.Cabin;
 import com.latam.sci.ptic.gso.auxiliar.CcitinGSORegEx;
+import com.latam.sci.ptic.gso.auxiliar.Constants;
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import java.util.ArrayList;
 import java.util.List;
@@ -320,12 +321,6 @@ public class RTDPAvailabilityRSParser {
             
             for (String line : OnDInfo) 
             {
-                m = CcitinGSORegEx.RegExTest("\\s*<OnDInfo Destination=\"AKL\" Origin=\"SCL\">.*$", line);
-                if (m.find())
-                {
-                    String ol = "hola";
-                }
-                
                 m = CcitinGSORegEx.RegExTest(CcitinGSORegEx.AirInventoryRTDPDisplayRS_OnDInfo_start, line);
                 if (m.find())
                 {
@@ -350,7 +345,13 @@ public class RTDPAvailabilityRSParser {
                     if (Fares == null) { Fares = new ArrayList<>(); }
                     
                     String ClsCode = m.group("ClsCode");
-                    int BidPrice = Integer.parseInt(m.group("BidPrice"));
+                    int BidPrice;
+                    try {
+                        BidPrice = Integer.parseInt(m.group("BidPrice"));
+                    }
+                    catch (Exception e) {
+                        BidPrice = Constants.getBID_PRICE_ERROR_VALUE();
+                    }
                     int AdjustedFareValue = Integer.parseInt(m.group("AdjustedFareValue"));
                     int FareValue = Integer.parseInt(m.group("FareValue"));
                     

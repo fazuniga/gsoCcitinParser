@@ -20,8 +20,14 @@ public final class Constants {
 
     public static Boolean testing = true;
     
+    private static int BID_PRICE_ERROR_VALUE = -10;
+    
     private static String FILE_FORMAT = ".xml";
     private static String INPUT_FILES_FOLDER = "inputFiles";
+
+    public static int getBID_PRICE_ERROR_VALUE() {
+        return BID_PRICE_ERROR_VALUE;
+    }
     
     public static String getFileFormat() {
         return FILE_FORMAT;
