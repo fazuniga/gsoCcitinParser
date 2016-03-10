@@ -8,6 +8,7 @@ package com.latam.sci.ptic.gso.main;
 import com.latam.sci.ptic.gso.auxiliar.Constants;
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRSDirection_OptionFlight_Seg_Cmp_Class;
+import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS;
 import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS;
 import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS_OnDInfo;
 import java.io.File;
@@ -61,6 +62,14 @@ public class CcitinParserProcess {
         {
             cpr.ccitinRQ.printCcitinRQ();
             
+            // OTA_AirAvailRS
+            for (OTA_AirAvailRS otaRS : cpr.getOTA_AirAvailRSList())
+            {
+                //
+            
+            
+            }
+            
             for (RTDPAvailabilityRS rtdpRS : cpr.rtdpAvailabilityRS)
             {
                 for (RTDPAvailabilityRS_OnDInfo OnDInfo : rtdpRS.getOnDInfos())
@@ -88,6 +97,7 @@ public class CcitinParserProcess {
                         }
                     }
                     
+                    // Final availability
                     List<CcitinRSDirection_OptionFlight_Seg_Cmp_Class> Classes = cpr.ccitinRS
                         .getDirections().get(0)
                         .getOptions().get(0)
