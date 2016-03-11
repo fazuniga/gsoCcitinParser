@@ -107,13 +107,7 @@ public class CcitinParserValidation {
                         System.out.println();
                         for (InventoryRS_FlightLeg Leg : invRS.getFlightLegs())
                         {
-                            System.out.println("[LEG] "
-                                + Leg.getOperatingCrrCode()+ " - " + Constants.FormatFltNum(Integer.parseInt(Leg.getOperatingFltNum())) + " - "
-                                + Leg.getLegDate() + " - "
-                                + "[" + Leg.getLegOrgn() + "] [" + Leg.getLegDstn() + "]" + " - "
-                                + ((Constants.IsOnlineCarrier(Leg.getOperatingCrrCode())) ? "[ONLINE]" : "[OFFLINE]")
-                            );
-
+                            PrintLeg(Leg);
                         }
                     }
                     
@@ -122,12 +116,7 @@ public class CcitinParserValidation {
                         System.out.println();
                         for (InventoryRS_FlightSegment Seg : invRS.getFlightSegments())
                         {
-                            System.out.println("[SEG] "
-                                + Constants.FormatFltNum(Integer.parseInt(Seg.getSegFltNum())) + " - "
-                                + Seg.getSegDate() + " - "
-                                + "[" + Seg.getSegOrgn() + "] [" + Seg.getSegDstn() + "]"
-                            );
-
+                            PrintSeg(Seg);
                         }
                     }
                 }
@@ -179,5 +168,24 @@ public class CcitinParserValidation {
                 }
             }*/
         }
+    }
+    
+    public void PrintLeg(InventoryRS_FlightLeg Leg)
+    {
+        System.out.println("[LEG] "
+            + Leg.getOperatingCrrCode()+ " - " + Constants.FormatFltNum(Integer.parseInt(Leg.getOperatingFltNum())) + " - "
+            + Leg.getLegDate() + " - "
+            + "[" + Leg.getLegOrgn() + "] [" + Leg.getLegDstn() + "]" + " - "
+            + ((Constants.IsOnlineCarrier(Leg.getOperatingCrrCode())) ? "[ONLINE]" : "[OFFLINE]")
+        );
+    }
+    
+    public void PrintSeg(InventoryRS_FlightSegment Seg)
+    {
+        System.out.println("[SEG] "
+            + Constants.FormatFltNum(Integer.parseInt(Seg.getSegFltNum())) + " - "
+            + Seg.getSegDate() + " - "
+            + "[" + Seg.getSegOrgn() + "] [" + Seg.getSegDstn() + "]"
+        );
     }
 }
