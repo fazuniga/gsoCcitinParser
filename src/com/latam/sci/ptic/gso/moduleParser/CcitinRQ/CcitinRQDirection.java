@@ -5,6 +5,8 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.CcitinRQ;
 
+import javax.print.attribute.standard.PrinterStateReason;
+
 /**
  *
  * @author 641515
@@ -139,19 +141,10 @@ public class CcitinRQDirection {
     
     public void printCcitinRQDirection()
     {
-        System.out.println("# Dirección: " + this.getDirectionID());
-        System.out.println("## Origen  : " + this.getOrigin());
-        System.out.println("## Destino : " + this.getDestination());
-        System.out.println("## POS     : " + this.getCountryPOS() + " [" + this.getCityPOS() + "]");
-
         System.out.println();
-        System.out.println("# Fechas");
-        System.out.println("## Start   : " + this.getStartDate());
-        System.out.println("## End     : " + this.getEndDate());
-
-        System.out.println();
-        System.out.println("# Parámetros");
-        System.out.println("## Direct Flights : " + this.getDirectFlights());
-        System.out.println("## OAL            : " + this.getAllowOAL());
+        System.out.println("[Direction # " + this.getDirectionID() + "]");
+        System.out.println("# [Origen / Destino / POS] : [" + this.getOrigin() + "] [" + this.getDestination() + "] [" + this.getCountryPOS() + " {" + this.getCityPOS() + "}]");
+        System.out.println("#   [Fechas - Start / End] : [" + this.getStartDate() + "] [" + this.getEndDate() + "]");
+        System.out.println("#             [Parameters] : [Direct Flights : " + this.getDirectFlights() + "] [Allow OAL : " + this.getAllowOAL() + "]");
     }
 }

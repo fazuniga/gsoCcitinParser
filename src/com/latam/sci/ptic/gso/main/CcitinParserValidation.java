@@ -35,28 +35,37 @@ public class CcitinParserValidation {
         {
             cpr.ccitinRQ.printCcitinRQ();
             
+            System.out.println();
+            
             // OTA_AirAvailRS
+            int OTA_RS = 0;
+
             for (OTA_AirAvailRS otaRS : cpr.getOTA_AirAvailRSList())
             {
+                OTA_RS++;
                 // Loop through all options obtained
-                System.out.println();
-                for (OTA_AirAvailRS_OriginDestinationOption option : otaRS.getOptions())
+                // System.out.println();
+                if (otaRS.getOptions() != null)
                 {
-                    System.out.println("[Option # " + option.getOriginDestinationRPH() + "]");
-                    
-                    // Loop through flight segments obtained
-                    for (OTA_AirAvailRS_FlightSegment segment : option.getOTA_AirAvailRSFlightSegments())
-                    {
-                        System.out.println(" [Segmento # " + segment.getFlightRPH() + "]: " 
-                                + segment.getMarketingAirlineCode() + " - " + FormatFltNum(Integer.parseInt(segment.getMarketingFlightNumber())) + " - "
-                                + segment.getOriginLocation() + " - " + segment.getDestinationLocation()
-                                + segment.getDepartureDate() + " - " + segment.getArrivalDate()
-                                + " - Online: " + IsOnlineCarrier(segment.getMarketingAirlineCode()).toString()
-                         );
+                    for (OTA_AirAvailRS_OriginDestinationOption option : otaRS.getOptions())
+                    {   
+                        // Loop through flight segments obtained
+                        for (OTA_AirAvailRS_FlightSegment segment : option.getOTA_AirAvailRSFlightSegments())
+                        {
+                            System.out.println("[OTA_AvailRS # " + Constants.FormatRPH(OTA_RS) + "] " +
+                                    "[OPTION # " + Constants.FormatRPH(Integer.parseInt(option.getOriginDestinationRPH())) + "] " +
+                                    "[SEGMENT # " + Constants.FormatRPH(Integer.parseInt(segment.getFlightRPH())) + "] " 
+                                    + segment.getMarketingAirlineCode() + " - " + Constants.FormatFltNum(Integer.parseInt(segment.getMarketingFlightNumber())) + " - "
+                                    + segment.getOriginLocation() + " - " + segment.getDestinationLocation() + " - "
+                                    + segment.getDepartureDate() + " - " + segment.getArrivalDate()
+                                    + " - Online: " + Constants.IsOnlineCarrier(segment.getMarketingAirlineCode()).toString()
+                             );
+                        }
                     }
                 }
             }
             
+            /*
             for (RTDPAvailabilityRS rtdpRS : cpr.rtdpAvailabilityRS)
             {
                 for (RTDPAvailabilityRS_OnDInfo OnDInfo : rtdpRS.getOnDInfos())
@@ -100,15 +109,9 @@ public class CcitinParserValidation {
                     
                     String a = "0";
                 }
-            }
+            }*/
         }
     }
     
-    public Boolean IsOnlineCarrier(String CrrCode) {
-        return Arrays.asList(Constants.LATAM_CARRIERS).contains(CrrCode);
-    }
     
-    public String FormatFltNum(int FltNum) {
-        return String.format("%0" + Constants.FLTNUM_DIGITS + "d", FltNum);
-    }
 }
