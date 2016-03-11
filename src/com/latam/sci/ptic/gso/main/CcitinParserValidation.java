@@ -6,8 +6,6 @@
 package com.latam.sci.ptic.gso.main;
 
 import com.latam.sci.ptic.gso.auxiliar.Constants;
-import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
-import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRSDirection_OptionFlight_Seg_Cmp_Class;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRQ.InventoryRQ;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS_FlightLeg;
@@ -15,10 +13,6 @@ import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS_FlightSegment
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS_FlightSegment;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS_OriginDestinationOption;
-import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS;
-import com.latam.sci.ptic.gso.moduleParser.RTDPAvailabilityRS.RTDPAvailabilityRS_OnDInfo;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
