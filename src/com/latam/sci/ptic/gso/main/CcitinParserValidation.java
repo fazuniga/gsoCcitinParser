@@ -102,27 +102,33 @@ public class CcitinParserValidation {
                             + ((Constants.IsOnlineCarrier(invRS.getFlightCarrier())) ? "[ONLINE]" : "[OFFLINE]")
                     );
                     
-                    System.out.println();
-                    for (InventoryRS_FlightLeg Leg : invRS.getFlightLegs())
+                    if (invRS.getFlightLegs() != null)
                     {
-                        System.out.println("[LEG] "
-                            + Leg.getOperatingCrrCode()+ " - " + Constants.FormatFltNum(Integer.parseInt(Leg.getOperatingFltNum())) + " - "
-                            + Leg.getLegDate() + " - "
-                            + "[" + Leg.getLegOrgn() + "] [" + Leg.getLegDstn() + "]" + " - "
-                            + ((Constants.IsOnlineCarrier(Leg.getOperatingCrrCode())) ? "[ONLINE]" : "[OFFLINE]")
-                        );
-                        
+                        System.out.println();
+                        for (InventoryRS_FlightLeg Leg : invRS.getFlightLegs())
+                        {
+                            System.out.println("[LEG] "
+                                + Leg.getOperatingCrrCode()+ " - " + Constants.FormatFltNum(Integer.parseInt(Leg.getOperatingFltNum())) + " - "
+                                + Leg.getLegDate() + " - "
+                                + "[" + Leg.getLegOrgn() + "] [" + Leg.getLegDstn() + "]" + " - "
+                                + ((Constants.IsOnlineCarrier(Leg.getOperatingCrrCode())) ? "[ONLINE]" : "[OFFLINE]")
+                            );
+
+                        }
                     }
                     
-                    System.out.println();
-                    for (InventoryRS_FlightSegment Seg : invRS.getFlightSegments())
+                    if (invRS.getFlightSegments() != null)
                     {
-                        System.out.println("[SEG] "
-                            + Constants.FormatFltNum(Integer.parseInt(Seg.getSegFltNum())) + " - "
-                            + Seg.getSegDate() + " - "
-                            + "[" + Seg.getSegOrgn() + "] [" + Seg.getSegDstn() + "]"
-                        );
-                        
+                        System.out.println();
+                        for (InventoryRS_FlightSegment Seg : invRS.getFlightSegments())
+                        {
+                            System.out.println("[SEG] "
+                                + Constants.FormatFltNum(Integer.parseInt(Seg.getSegFltNum())) + " - "
+                                + Seg.getSegDate() + " - "
+                                + "[" + Seg.getSegOrgn() + "] [" + Seg.getSegDstn() + "]"
+                            );
+
+                        }
                     }
                 }
             }
@@ -174,6 +180,4 @@ public class CcitinParserValidation {
             }*/
         }
     }
-    
-    
 }
