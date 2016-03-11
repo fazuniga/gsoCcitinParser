@@ -49,71 +49,8 @@ public class CcitinParserProcess {
             if (cpr != null) { cprList.add(cpr); }
         }
         
-        validateResponses(cprList);
-    }
-    
-    public void validateResponses(List<CcitinParserResponse> cprList) {
-        
-        System.out.println("--------------------");
-        System.out.println("#### Validation ####");
-        System.out.println("--------------------");
-        
-        for (CcitinParserResponse cpr : cprList)
-        {
-            cpr.ccitinRQ.printCcitinRQ();
-            
-            // OTA_AirAvailRS
-            for (OTA_AirAvailRS otaRS : cpr.getOTA_AirAvailRSList())
-            {
-                //
-            
-            
-            }
-            
-            for (RTDPAvailabilityRS rtdpRS : cpr.rtdpAvailabilityRS)
-            {
-                for (RTDPAvailabilityRS_OnDInfo OnDInfo : rtdpRS.getOnDInfos())
-                {
-                    System.out.println("## O&D: " + OnDInfo.getOrigin() + " / " + OnDInfo.getDestination());
-                    
-                    Boolean RTDPControlled = false;
-                    for (Integer SegIndex : OnDInfo.getSegIndex())
-                    {
-                        String segRTDPActive = rtdpRS.getSegments().get(SegIndex - 1).getRTDPActive();
-                        Boolean RTDPActive = (segRTDPActive == "true") ? true : false;
-                        RTDPControlled = RTDPControlled && RTDPActive;
-                    }
-                    
-                    System.out.println("## Disponibilidad: " + ((RTDPControlled) ? "BP" : "AU"));
-                    
-                    // Choose the right availability
-                    List<List<SeatsClass>> Availability = new ArrayList<>();
-                    for (Integer SegIndex : OnDInfo.getSegIndex())
-                    {
-                        if (RTDPControlled) {
-                            Availability.add(rtdpRS.getSegments().get(SegIndex - 1).getRTDPAvail());
-                        } else {
-                            Availability.add(rtdpRS.getSegments().get(SegIndex - 1).getSeatsAvail());
-                        }
-                    }
-                    
-                    // Final availability
-                    List<CcitinRSDirection_OptionFlight_Seg_Cmp_Class> Classes = cpr.ccitinRS
-                        .getDirections().get(0)
-                        .getOptions().get(0)
-                        .getFlights().get(0)
-                        .getSegments().get(0)
-                        .getCompartments().get(0)
-                        .getClasses();
-                    
-                    for (CcitinRSDirection_OptionFlight_Seg_Cmp_Class Class : Classes)
-                    {
-                        System.out.println("Clase: " + Class.getClsCode() + " - Availability: " + Class.getOdAvailability());
-                    }
-                    
-                    String a = "0";
-                }
-            }
-        }
+        // Validate content of files
+        CcitinParserValidation cpv = new CcitinParserValidation();
+        cpv.validateResponses(cprList);
     }
 }

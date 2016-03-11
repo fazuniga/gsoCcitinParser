@@ -18,6 +18,9 @@ import java.util.regex.Pattern;
  */
 public final class Constants {
 
+    public static String[] LATAM_CARRIERS = { "LA", "XL", "4M" };
+    public static int FLTNUM_DIGITS = 5;
+    
     public static Boolean testing = true;
     
     private static int BID_PRICE_ERROR_VALUE = -10;
