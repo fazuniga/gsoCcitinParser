@@ -43,7 +43,7 @@ public class CcitinParserProcess {
         
         for (File file : files)
         {
-            System.out.println("##\tProcesando:\t" + file.getName());
+            System.out.println("## Procesando:\t" + file.getName());
             
             CcitinParserResponse cpr = processTestFile.processFile(file);
             if (cpr != null) { cprList.add(cpr); }
