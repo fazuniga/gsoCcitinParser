@@ -27,9 +27,9 @@ public class CcitinParserValidation {
     
     public void validateResponses(List<CcitinParserResponse> cprList) {
         
-        System.out.println("--------------------");
-        System.out.println("#### Validation ####");
-        System.out.println("--------------------");
+        System.out.println("----------------------------------------");
+        System.out.println("############ Validation ############");
+        System.out.println("----------------------------------------");
         
         for (CcitinParserResponse cpr : cprList)
         {
@@ -48,10 +48,11 @@ public class CcitinParserValidation {
                     for (OTA_AirAvailRS_FlightSegment segment : option.getOTA_AirAvailRSFlightSegments())
                     {
                         System.out.println(" [Segmento # " + segment.getFlightRPH() + "]: " 
-                                + segment.getMarketingAirlineCode() + " " + FormatFltNum(Integer.parseInt(segment.getMarketingFlightNumber()))
+                                + segment.getMarketingAirlineCode() + " - " + FormatFltNum(Integer.parseInt(segment.getMarketingFlightNumber())) + " - "
+                                + segment.getOriginLocation() + " - " + segment.getDestinationLocation()
+                                + segment.getDepartureDate() + " - " + segment.getArrivalDate()
+                                + " - Online: " + IsOnlineCarrier(segment.getMarketingAirlineCode()).toString()
                          );
-                        
-                        
                     }
                 }
             }
