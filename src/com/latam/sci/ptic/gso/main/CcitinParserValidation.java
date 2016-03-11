@@ -53,9 +53,9 @@ public class CcitinParserValidation {
                     Boolean newOption;
                     for (OTA_AirAvailRS_OriginDestinationOption option : otaRS.getOptions())
                     {   
-                        newOption = true;
-                        
                         // Loop through flight segments obtained
+                        newOption = true;
+
                         for (OTA_AirAvailRS_FlightSegment segment : option.getOTA_AirAvailRSFlightSegments())
                         {
                             System.out.println("[OTA_AvailRS # " + Constants.FormatRPH(OTA_RS) + "] "
@@ -64,10 +64,9 @@ public class CcitinParserValidation {
                                     + ((newOption) ? "[*]" : "[ ]") + " "
                                     + segment.getMarketingAirlineCode() + " - " + Constants.FormatFltNum(Integer.parseInt(segment.getMarketingFlightNumber())) + " - "
                                     + segment.getOriginLocation() + " - " + segment.getDestinationLocation() + " - "
-                                    + segment.getDepartureDate() + " - " + segment.getArrivalDate()
-                                    + " - Online: " + Constants.IsOnlineCarrier(segment.getMarketingAirlineCode()).toString()
-                            );
-                            
+                                    + segment.getDepartureDate() + " - " + segment.getArrivalDate() + " "
+                                    + ((Constants.IsOnlineCarrier(segment.getMarketingAirlineCode())) ? "[ONLINE]" : "[OFFLINE]")
+                            );  
                             newOption = false;
                         }
                     }
@@ -85,7 +84,7 @@ public class CcitinParserValidation {
 
                     System.out.println("[InventoryRQ # " + Constants.FormatRPH(invRQ_Number) + "] "
                             + invRQ.getFlightCarrier() + " - " + Constants.FormatFltNum(Integer.parseInt(invRQ.getFlightNumber())) + " - "
-                            + invRQ.getFlightDate() + " - Online: " + Constants.IsOnlineCarrier(invRQ.getFlightCarrier()).toString()
+                            + ((Constants.IsOnlineCarrier(invRQ.getFlightCarrier())) ? "[ONLINE]" : "[OFFLINE]")
                     );
                 }
             }
