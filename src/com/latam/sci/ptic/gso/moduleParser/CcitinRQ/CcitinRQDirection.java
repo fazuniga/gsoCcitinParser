@@ -5,8 +5,6 @@
  */
 package com.latam.sci.ptic.gso.moduleParser.CcitinRQ;
 
-import javax.print.attribute.standard.PrinterStateReason;
-
 /**
  *
  * @author 641515

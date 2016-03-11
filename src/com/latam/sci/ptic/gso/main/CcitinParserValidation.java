@@ -9,6 +9,9 @@ import com.latam.sci.ptic.gso.auxiliar.Constants;
 import com.latam.sci.ptic.gso.auxiliar.SeatsClass;
 import com.latam.sci.ptic.gso.moduleParser.CcitinRS.CcitinRSDirection_OptionFlight_Seg_Cmp_Class;
 import com.latam.sci.ptic.gso.moduleParser.InventoryRQ.InventoryRQ;
+import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS;
+import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS_FlightLeg;
+import com.latam.sci.ptic.gso.moduleParser.InventoryRS.InventoryRS_FlightSegment;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS_FlightSegment;
 import com.latam.sci.ptic.gso.moduleParser.OTA_AirAvailRS.OTA_AirAvailRS_OriginDestinationOption;
@@ -84,8 +87,49 @@ public class CcitinParserValidation {
 
                     System.out.println("[InventoryRQ # " + Constants.FormatRPH(invRQ_Number) + "] "
                             + invRQ.getFlightCarrier() + " - " + Constants.FormatFltNum(Integer.parseInt(invRQ.getFlightNumber())) + " - "
+                            + invRQ.getFlightDate() + " - "
                             + ((Constants.IsOnlineCarrier(invRQ.getFlightCarrier())) ? "[ONLINE]" : "[OFFLINE]")
                     );
+                }
+            }
+            
+            // InventoryRS
+            if (cpr.getInventoryRSList() != null)
+            {
+                System.out.println();
+                int invRS_Number = 0;
+                for (InventoryRS invRS : cpr.getInventoryRSList())
+                {
+                    invRS_Number++;
+
+                    System.out.println("[InventoryRS # " + Constants.FormatRPH(invRS_Number) + "] "
+                            + invRS.getFlightCarrier() + " - " + Constants.FormatFltNum(Integer.parseInt(invRS.getFlightNumber())) + " - "
+                            + invRS.getFlightDate() + " - "
+                            + ((Constants.IsOnlineCarrier(invRS.getFlightCarrier())) ? "[ONLINE]" : "[OFFLINE]")
+                    );
+                    
+                    System.out.println();
+                    for (InventoryRS_FlightLeg Leg : invRS.getFlightLegs())
+                    {
+                        System.out.println("[LEG] "
+                            + Leg.getOperatingCrrCode()+ " - " + Constants.FormatFltNum(Integer.parseInt(Leg.getOperatingFltNum())) + " - "
+                            + Leg.getLegDate() + " - "
+                            + "[" + Leg.getLegOrgn() + "] [" + Leg.getLegDstn() + "]" + " - "
+                            + ((Constants.IsOnlineCarrier(Leg.getOperatingCrrCode())) ? "[ONLINE]" : "[OFFLINE]")
+                        );
+                        
+                    }
+                    
+                    System.out.println();
+                    for (InventoryRS_FlightSegment Seg : invRS.getFlightSegments())
+                    {
+                        System.out.println("[SEG] "
+                            + Constants.FormatFltNum(Integer.parseInt(Seg.getSegFltNum())) + " - "
+                            + Seg.getSegDate() + " - "
+                            + "[" + Seg.getSegOrgn() + "] [" + Seg.getSegDstn() + "]"
+                        );
+                        
+                    }
                 }
             }
             
